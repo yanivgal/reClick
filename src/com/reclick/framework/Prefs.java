@@ -8,6 +8,8 @@ public class Prefs {
 	
 	public static final String PROPERTY_APP_VERSION = "appVersion";
 	public static final String PROPERTY_GCM_REG_ID = "gcmRegistrationId";
+	public static final String PROPERTY_USERNAME = "username";
+	public static final String PROPERTY_NICKNAME = "nickname";
 	
 	public static SharedPreferences preferences(Context context) {
 		return context.getSharedPreferences(
@@ -34,6 +36,22 @@ public class Prefs {
 	
 	public static void setGcmRegId(Context context, String value) {
 		set(context, PROPERTY_GCM_REG_ID, value);
+	}
+	
+	public static String getUsername(Context context) {
+		return (String) get(context, PROPERTY_USERNAME, "");
+	}
+	
+	public static void setUsername(Context context, String value) {
+		set(context, PROPERTY_USERNAME, value);
+	}
+	
+	public static String getNickname(Context context) {
+		return (String) get(context, PROPERTY_NICKNAME, "");
+	}
+	
+	public static void setNickname(Context context, String value) {
+		set(context, PROPERTY_NICKNAME, value);
 	}
 	
 	private static Object get(Context context, String key, Object defaultValue) {
