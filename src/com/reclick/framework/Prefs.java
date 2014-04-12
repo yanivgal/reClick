@@ -54,6 +54,12 @@ public class Prefs {
 		set(context, PROPERTY_NICKNAME, value);
 	}
 	
+	public static void removePref(Context context, String key) {
+		SharedPreferences.Editor editor= preferencesEditor(context);
+		editor.remove(key);
+		editor.commit();
+	}
+	
 	private static Object get(Context context, String key, Object defaultValue) {
 		SharedPreferences prefs = preferences(context);
 		if (defaultValue instanceof Integer) {

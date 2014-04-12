@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
+import android.widget.Toast;
 
 public class App {
 	
@@ -21,6 +22,10 @@ public class App {
 	        // should never happen
 	        throw new RuntimeException("Could not get package name: " + e);
 	    }
+	}
+	
+	public static void showToast(Context context, String text) {
+		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 	}
 	
 	public static final String md5(final String s) {
