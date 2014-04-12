@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.reclick.framework.*;
-import com.reclick.reclick.MainActivity;
+import com.reclick.reclick.LoginActivity;
 import com.reclick.reclick.R;
 import com.reclick.reclick.SplashActivity;
 

@@ -31,11 +31,17 @@ public class SplashActivity extends Activity {
 			finish();
 		}
 		
+		Intent intent;
+		
 		if (Prefs.getUsername(this).isEmpty()) {
-			//TODO start login activity	
+			intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
+		} else {
+			intent = new Intent(this, com.reclick.reclick.MainActivity.class);
 		}
 		
-		//TODO start main game activity
+		startActivity(intent);
+		
+		finish();
 	}
 	
 	/**
