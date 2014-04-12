@@ -1,15 +1,21 @@
 package com.reclick.reclick;
 
+import java.util.concurrent.ExecutionException;
+
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.reclick.framework.Prefs;
 import com.reclick.gcm.Gcm;
-
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
+import com.reclick.request.Request;
+import com.reclick.request.Request.RequestObject;
 
 public class MainActivity extends Activity {
 	
@@ -18,7 +24,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.login);
 		
 		if (checkPlayServices()) {
 			new Gcm(this).register();
@@ -30,6 +36,18 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void login(View v) {
+		RequestObject ro = new RequestObject("http://192.168.1.10/reclick/");
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new Request(ro).execute().get();
+		} catch (InterruptedException e) {
+			
+		} catch (ExecutionException e) {
+
+		}
 	}
 	
 	public void afterGcm() {
