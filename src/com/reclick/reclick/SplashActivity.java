@@ -1,15 +1,14 @@
 package com.reclick.reclick;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.reclick.framework.Prefs;
 import com.reclick.gcm.Gcm;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
 
 public class SplashActivity extends Activity {
 	

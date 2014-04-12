@@ -4,5 +4,8 @@
     <string name="app_name">reClick</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello reClick!</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">Signup</string>
+    
 
 </resources>

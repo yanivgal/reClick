@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.reclick.framework.*;
-import com.reclick.reclick.LoginActivity;
+import com.reclick.framework.App;
+import com.reclick.framework.Prefs;
 import com.reclick.reclick.R;
 import com.reclick.reclick.SplashActivity;
 
@@ -30,12 +30,12 @@ public class Gcm {
 		private final int NUM_OF_GCM_RETRIES = 5;
 		
 		private Context context;
-		private SplashActivity splahActivity;
+		private SplashActivity splashActivity;
 		
 		public GcmRegister(Context context) {
 			super();
 			this.context = context;
-			this.splahActivity = (SplashActivity) context;
+			this.splashActivity = (SplashActivity) context;
 		}
 
 		@Override
@@ -76,7 +76,7 @@ public class Gcm {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			splahActivity.afterGcm();
+			splashActivity.afterGcm();
 		}
 		
 		private String getRegistrationId(Context context) {
