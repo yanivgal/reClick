@@ -42,32 +42,70 @@
         android:layout_marginBottom="5dp"
         android:textSize="20sp"
         android:textColor="#FFFFFFFF" />
+    
+    <TextView
+        android:id="@+id/login_nickname_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#FFFFFFFF"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        android:text="Nickname" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/login_nickname_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:background="@drawable/edit_text_bg"
+        android:inputType="textPassword"
+        android:layout_marginBottom="5dp"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:textColor="#FFFFFFFF" />
 
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="login"
-            android:text="@string/login_btn" />
+	<Button
+	    android:id="@+id/login_btn"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:onClick="login"
+	    android:layout_marginBottom="5dp"
+	    android:text="@string/login_btn" />
+	
+	<Button
+	    android:id="@+id/signup_btn"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:onClick="signup"
+	    android:visibility="gone"
+	    android:layout_marginBottom="5dp"
+	    android:text="@string/signup_btn" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF"
-            android:text="Or" />
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/signup_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/signup_btn" />
+		<TextView
+		    android:id="@+id/login_here_link"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:clickable="true"
+		    android:onClick="loginLink"
+		    android:text="Already has account! Login here"
+		    android:textColor="#FFFFFFFF"
+		    android:visibility="gone" />
 
-    </LinearLayout>
+		<TextView
+		    android:id="@+id/sign_up_here_link"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:clickable="true"
+		    android:onClick="signUpLink"
+		    android:text="New to reClick? Sign Up here"
+		    android:textColor="#FFFFFFFF" />
+
+	</LinearLayout>
 
 </LinearLayout>

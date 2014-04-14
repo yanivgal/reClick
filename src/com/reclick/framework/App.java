@@ -3,10 +3,12 @@ package com.reclick.framework;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 public class App {
@@ -51,5 +53,12 @@ public class App {
 	        Log.e(TAG, e.getMessage());
 	    }
 	    return "";
+	}
+	
+	public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity
+        		.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(
+        		activity.getCurrentFocus().getWindowToken(), 0);
 	}
 }
