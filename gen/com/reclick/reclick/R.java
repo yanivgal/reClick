@@ -225,7 +225,8 @@ containing a value of this type.
         public static final int main_container=0x7f020020;
     }
     public static final class id {
-        public static final int action_settings=0x7f050010;
+        public static final int action_settings=0x7f050011;
+        public static final int button1=0x7f050010;
         public static final int hybrid=0x7f050004;
         public static final int login_btn=0x7f05000b;
         public static final int login_here_link=0x7f05000d;

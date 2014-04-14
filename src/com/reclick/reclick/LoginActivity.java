@@ -61,7 +61,10 @@ public class LoginActivity extends Activity {
 		}
 		
 		JSONObject response = sendLoginRequest(
-				username, password, Prefs.getGcmRegId(this));
+				username,
+				password,
+				Prefs.getGcmRegId(this)
+				);
 		
 		try {
 			if (response.getString("status").equals("success")) {
@@ -75,7 +78,6 @@ public class LoginActivity extends Activity {
 				startActivity(intent);
 				finish();
 			}
-			
 			App.showToast(this, response.getString("message"));
 		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
@@ -84,6 +86,37 @@ public class LoginActivity extends Activity {
 	
 	public void signup(View v) {
 		App.hideSoftKeyboard(this);
+		
+		String username = usernameInput.getText().toString();
+		String password = passwordInput.getText().toString();
+		String nickname = nicknameInput.getText().toString();
+		
+		if (username.isEmpty() || password.isEmpty() || nickname.isEmpty()) {
+			App.showToast(this, "Please fill all fields");
+			return;
+		}
+		
+		JSONObject response = sendSignupRequest(
+				username,
+				password,
+				nickname,
+				Prefs.getGcmRegId(this)
+				);
+		
+		try {
+			if (response.getString("status").equals("success")) {
+				Prefs.setUsername(this, response.getString("username"));
+				Prefs.setNickname(this, response.getString("nickname"));
+				
+				Intent intent = new Intent(
+						this, com.reclick.reclick.MainActivity.class);
+				startActivity(intent);
+				finish();
+			}
+			App.showToast(this, response.getString("message"));
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+		}
 	}
 	
 	public void loginLink(View v) {
@@ -112,6 +145,26 @@ public class LoginActivity extends Activity {
 		RequestObject ro = new RequestObject(Urls.login(this), RequestType.POST);
 		ro.addParameter("username", username);
 		ro.addParameter("password", App.md5(password));
+		ro.addParameter("gcmRegId", gcmRegId);
+		
+		try {
+			response = new Request(ro).execute().get();
+		} catch (InterruptedException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (ExecutionException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
+		return response;
+	}
+	
+	private JSONObject sendSignupRequest(String username, String password, String nickname, String gcmRegId) {
+		JSONObject response = null;
+		
+		RequestObject ro = new RequestObject(Urls.signup(this), RequestType.POST);
+		ro.addParameter("username", username);
+		ro.addParameter("password", App.md5(password));
+		ro.addParameter("nickname", nickname);
 		ro.addParameter("gcmRegId", gcmRegId);
 		
 		try {
