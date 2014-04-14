@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="login_activity_username_label">Username</string>
+    <string name="login_activity_password_label">Password</string>
+    <string name="login_activity_nickname_label">Nickname</string>
+    <string name="login_activity_login_btn">Login</string>
+    <string name="login_activity_signup_btn">Sign Up</string>
+    <string name="login_activity_login_here_link">Already has account! Login here</string>
+    <string name="login_activity_sign_up_here_link">New to reClick? Sign Up here</string>
+    
+</resources>

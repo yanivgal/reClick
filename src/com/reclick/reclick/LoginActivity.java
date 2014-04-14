@@ -19,12 +19,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 	
 	private final String TAG = this.getClass().getSimpleName();
 	
+	private LinearLayout mainLayout;
 	private EditText usernameInput;
 	private EditText passwordInput;
 	private TextView nicknameLabel;
@@ -39,14 +41,17 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		usernameInput = (EditText) findViewById(R.id.login_username_input);
-		passwordInput = (EditText) findViewById(R.id.login_password_input);
-		nicknameLabel = (TextView) findViewById(R.id.login_nickname_label);
-		nicknameInput = (EditText) findViewById(R.id.login_nickname_input);
-		loginBtn = (Button) findViewById(R.id.login_btn);
-		signUpBtn = (Button) findViewById(R.id.signup_btn);
-		loginLink = (TextView) findViewById(R.id.login_here_link);
-		signUpLink = (TextView) findViewById(R.id.sign_up_here_link);
+		mainLayout = (LinearLayout) findViewById(R.id.login_main_content);
+		mainLayout.bringToFront();
+		
+		usernameInput = (EditText) findViewById(R.id.login_activity_username_input);
+		passwordInput = (EditText) findViewById(R.id.login_activity_password_input);
+		nicknameLabel = (TextView) findViewById(R.id.login_activity_nickname_label);
+		nicknameInput = (EditText) findViewById(R.id.login_activity_nickname_input);
+		loginBtn = (Button) findViewById(R.id.login_activity_login_btn);
+		signUpBtn = (Button) findViewById(R.id.login_activity_signup_btn);
+		loginLink = (TextView) findViewById(R.id.login_activity_login_here_link);
+		signUpLink = (TextView) findViewById(R.id.login_activity_sign_up_here_link);
 	}
 	
 	public void login(View v) {
