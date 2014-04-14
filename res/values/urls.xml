@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scheme">http</string>
+    <string name="host">192.168.1.10</string>
+    <string name="path">reclick</string>
+    <string name="method_login">login</string>
+    <string name="method_sign_up">signup</string>
+    
+</resources>

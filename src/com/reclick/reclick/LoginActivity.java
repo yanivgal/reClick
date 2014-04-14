@@ -10,6 +10,7 @@ import com.reclick.framework.Prefs;
 import com.reclick.request.Request;
 import com.reclick.request.Request.RequestObject;
 import com.reclick.request.Request.RequestType;
+import com.reclick.request.Urls;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -59,30 +60,23 @@ public class LoginActivity extends Activity {
 			return;
 		}
 		
-		RequestObject ro = new RequestObject("http://192.168.1.10/reclick/login/", RequestType.POST);
-		ro.addParameter("username", username);
-		ro.addParameter("password", App.md5(password));
-		ro.addParameter("gcmRegId", Prefs.getGcmRegId(this));
+		JSONObject response = sendLoginRequest(
+				username, password, Prefs.getGcmRegId(this));
 		
 		try {
-			JSONObject jsonResponse = new Request(ro).execute().get();
-			if (jsonResponse.getString("status").equals("success")) {
+			if (response.getString("status").equals("success")) {
 				
-				Prefs.setUsername(this, jsonResponse.getString("username"));
-				Prefs.setNickname(this, jsonResponse.getString("nickname"));
+				Prefs.setUsername(this, response.getString("username"));
+				Prefs.setNickname(this, response.getString("nickname"));
 				
 				
 				Intent intent = new Intent(
 						this, com.reclick.reclick.MainActivity.class);
 				startActivity(intent);
-				
-				App.showToast(this, jsonResponse.getString("message"));
+				finish();
 			}
-			App.showToast(this, jsonResponse.getString("message"));
-		} catch (InterruptedException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (ExecutionException e) {
-			Log.e(TAG, e.getMessage());
+			
+			App.showToast(this, response.getString("message"));
 		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -110,5 +104,24 @@ public class LoginActivity extends Activity {
 		nicknameInput.setVisibility(View.VISIBLE);
 		signUpBtn.setVisibility(View.VISIBLE);
 		loginLink.setVisibility(View.VISIBLE);
+	}
+	
+	private JSONObject sendLoginRequest(String username, String password, String gcmRegId) {
+		JSONObject response = null;
+		
+		RequestObject ro = new RequestObject(Urls.login(this), RequestType.POST);
+		ro.addParameter("username", username);
+		ro.addParameter("password", App.md5(password));
+		ro.addParameter("gcmRegId", gcmRegId);
+		
+		try {
+			response = new Request(ro).execute().get();
+		} catch (InterruptedException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (ExecutionException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
+		return response;
 	}
 }

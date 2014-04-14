@@ -353,7 +353,12 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int gcm_sender_id=0x7f06001a;
         public static final int hello_world=0x7f06001d;
+        public static final int host=0x7f060021;
         public static final int login_btn=0x7f06001e;
+        public static final int method_login=0x7f060023;
+        public static final int method_sign_up=0x7f060024;
+        public static final int path=0x7f060022;
+        public static final int scheme=0x7f060020;
         public static final int signup_btn=0x7f06001f;
     }
     public static final class style {

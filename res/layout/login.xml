@@ -22,6 +22,7 @@
         android:background="@drawable/edit_text_bg"
         android:layout_marginBottom="5dp"
         android:textSize="20sp"
+        android:singleLine="true"
         android:textColor="#FFFFFFFF" />
         
 	<TextView
@@ -41,6 +42,7 @@
         android:inputType="textPassword"
         android:layout_marginBottom="5dp"
         android:textSize="20sp"
+        android:singleLine="true"
         android:textColor="#FFFFFFFF" />
     
     <TextView
@@ -62,6 +64,7 @@
         android:layout_marginBottom="5dp"
         android:textSize="20sp"
         android:visibility="gone"
+        android:singleLine="true"
         android:textColor="#FFFFFFFF" />
 
 	<Button
