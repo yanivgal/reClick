@@ -227,23 +227,23 @@ containing a value of this type.
         public static final int main_container=0x7f020022;
     }
     public static final class id {
-        public static final int FrameLayout1=0x7f050005;
         public static final int action_settings=0x7f050015;
         public static final int button1=0x7f050014;
         public static final int hybrid=0x7f050004;
         public static final int imageView1=0x7f050012;
         public static final int login_activity_login_btn=0x7f05000e;
         public static final int login_activity_login_here_link=0x7f050010;
+        public static final int login_activity_main_content=0x7f050005;
+        public static final int login_activity_nickname_container=0x7f05000b;
         public static final int login_activity_nickname_input=0x7f05000d;
         public static final int login_activity_nickname_label=0x7f05000c;
-        public static final int login_activity_password_input=0x7f05000b;
-        public static final int login_activity_password_label=0x7f05000a;
+        public static final int login_activity_password_input=0x7f05000a;
+        public static final int login_activity_password_label=0x7f050009;
         public static final int login_activity_sign_up_here_link=0x7f050011;
         public static final int login_activity_signup_btn=0x7f05000f;
-        public static final int login_activity_username_input=0x7f050009;
-        public static final int login_activity_username_label=0x7f050008;
-        public static final int login_main_content=0x7f050006;
-        public static final int logo=0x7f050007;
+        public static final int login_activity_username_input=0x7f050008;
+        public static final int login_activity_username_label=0x7f050007;
+        public static final int logo=0x7f050006;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
@@ -400,13 +400,20 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
-        public static final int login_activity_button=0x7f090007;
-        public static final int login_activity_input=0x7f090006;
-        public static final int login_activity_label=0x7f090002;
-        public static final int login_activity_label_blue=0x7f090004;
-        public static final int login_activity_label_green=0x7f090005;
-        public static final int login_activity_label_red=0x7f090003;
-        public static final int login_activity_text=0x7f090008;
+        public static final int basic_container=0x7f090005;
+        public static final int login_activity_button=0x7f09000e;
+        public static final int login_activity_input=0x7f09000c;
+        public static final int login_activity_input_password=0x7f09000d;
+        public static final int login_activity_label=0x7f090008;
+        public static final int login_activity_label_blue=0x7f09000a;
+        public static final int login_activity_label_green=0x7f09000b;
+        public static final int login_activity_label_red=0x7f090009;
+        public static final int login_activity_main_content=0x7f090006;
+        public static final int login_activity_text=0x7f09000f;
+        public static final int logo=0x7f090002;
+        public static final int logo_login_activity=0x7f090007;
+        public static final int main_container=0x7f090004;
+        public static final int text_shadow=0x7f090003;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.

@@ -27,9 +27,9 @@ public class LoginActivity extends Activity {
 	private final String TAG = this.getClass().getSimpleName();
 	
 	private LinearLayout mainLayout;
+	private LinearLayout nicknameContainer;
 	private EditText usernameInput;
 	private EditText passwordInput;
-	private TextView nicknameLabel;
 	private EditText nicknameInput;
 	private Button loginBtn;
 	private Button signUpBtn;
@@ -41,15 +41,18 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		mainLayout = (LinearLayout) findViewById(R.id.login_main_content);
+		mainLayout = (LinearLayout) findViewById(R.id.login_activity_main_content);
 		mainLayout.bringToFront();
+		
+		nicknameContainer = (LinearLayout) findViewById(R.id.login_activity_nickname_container);
 		
 		usernameInput = (EditText) findViewById(R.id.login_activity_username_input);
 		passwordInput = (EditText) findViewById(R.id.login_activity_password_input);
-		nicknameLabel = (TextView) findViewById(R.id.login_activity_nickname_label);
 		nicknameInput = (EditText) findViewById(R.id.login_activity_nickname_input);
+		
 		loginBtn = (Button) findViewById(R.id.login_activity_login_btn);
 		signUpBtn = (Button) findViewById(R.id.login_activity_signup_btn);
+		
 		loginLink = (TextView) findViewById(R.id.login_activity_login_here_link);
 		signUpLink = (TextView) findViewById(R.id.login_activity_sign_up_here_link);
 	}
@@ -125,8 +128,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void loginLink(View v) {
-		nicknameLabel.setVisibility(View.GONE);
-		nicknameInput.setVisibility(View.GONE);
+		nicknameContainer.setVisibility(View.GONE);
 		signUpBtn.setVisibility(View.GONE);
 		loginLink.setVisibility(View.GONE);
 		
@@ -138,8 +140,7 @@ public class LoginActivity extends Activity {
 		loginBtn.setVisibility(View.GONE);
 		signUpLink.setVisibility(View.GONE);
 		
-		nicknameLabel.setVisibility(View.VISIBLE);
-		nicknameInput.setVisibility(View.VISIBLE);
+		nicknameContainer.setVisibility(View.VISIBLE);
 		signUpBtn.setVisibility(View.VISIBLE);
 		loginLink.setVisibility(View.VISIBLE);
 	}
