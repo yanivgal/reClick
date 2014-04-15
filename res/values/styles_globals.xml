@@ -23,6 +23,19 @@
 	    <item name="android:background">@drawable/bg_repeat</item>
 	</style>
 	
+	<style name="main_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">20dp</item>
+    </style>
+    
+	<style name="main_content.splash">
+	    <item name="android:layout_height">match_parent</item>
+	    <item name="android:gravity">center</item>
+	</style>
+	
 	<style name="basic_container">
 	    <item name="android:layout_width">match_parent</item>
 	    <item name="android:layout_height">wrap_content</item>

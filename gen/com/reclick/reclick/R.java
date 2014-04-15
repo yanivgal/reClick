@@ -360,7 +360,9 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int gcm_sender_id=0x7f06001a;
         public static final int hello_world=0x7f06001d;
-        public static final int host=0x7f060026;
+        public static final int host=0x7f060028;
+        public static final int login_activity_fill_all_fields_login=0x7f060025;
+        public static final int login_activity_fill_all_fields_sign_up=0x7f060026;
         public static final int login_activity_login_btn=0x7f060021;
         public static final int login_activity_login_here_link=0x7f060023;
         public static final int login_activity_nickname_label=0x7f060020;
@@ -368,10 +370,10 @@ containing a value of this type.
         public static final int login_activity_sign_up_here_link=0x7f060024;
         public static final int login_activity_signup_btn=0x7f060022;
         public static final int login_activity_username_label=0x7f06001e;
-        public static final int method_login=0x7f060028;
-        public static final int method_sign_up=0x7f060029;
-        public static final int path=0x7f060027;
-        public static final int scheme=0x7f060025;
+        public static final int method_login=0x7f06002a;
+        public static final int method_sign_up=0x7f06002b;
+        public static final int path=0x7f060029;
+        public static final int scheme=0x7f060027;
     }
     public static final class style {
         /** 
@@ -400,20 +402,21 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
-        public static final int basic_container=0x7f090007;
+        public static final int basic_container=0x7f090009;
         public static final int footer_img=0x7f090003;
-        public static final int login_activity_button=0x7f090010;
-        public static final int login_activity_input=0x7f09000e;
-        public static final int login_activity_input_password=0x7f09000f;
-        public static final int login_activity_label=0x7f09000a;
-        public static final int login_activity_label_blue=0x7f09000c;
-        public static final int login_activity_label_green=0x7f09000d;
-        public static final int login_activity_label_red=0x7f09000b;
-        public static final int login_activity_main_content=0x7f090008;
-        public static final int login_activity_text=0x7f090011;
+        public static final int login_activity_button=0x7f090011;
+        public static final int login_activity_input=0x7f09000f;
+        public static final int login_activity_input_password=0x7f090010;
+        public static final int login_activity_label=0x7f09000b;
+        public static final int login_activity_label_blue=0x7f09000d;
+        public static final int login_activity_label_green=0x7f09000e;
+        public static final int login_activity_label_red=0x7f09000c;
+        public static final int login_activity_text=0x7f090012;
         public static final int logo=0x7f090004;
-        public static final int logo_login_activity=0x7f090009;
+        public static final int logo_login_activity=0x7f09000a;
         public static final int main_container=0x7f090006;
+        public static final int main_content=0x7f090007;
+        public static final int main_content_splash=0x7f090008;
         public static final int main_footer=0x7f090002;
         public static final int text_shadow=0x7f090005;
     }
