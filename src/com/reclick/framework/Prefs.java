@@ -1,8 +1,9 @@
 package com.reclick.framework;
 
+import com.reclick.reclick.R;
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.reclick.reclick.R;
 
 public class Prefs {
 	

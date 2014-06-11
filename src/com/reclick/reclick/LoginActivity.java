@@ -1,19 +1,19 @@
 package com.reclick.reclick;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.reclick.framework.App;
-import com.reclick.framework.Prefs;
-import com.reclick.request.Request;
-import com.reclick.request.Request.RequestObject;
-import com.reclick.request.Request.RequestType;
-import com.reclick.request.Urls;
-
+import unite.Client;
+import unite.Response;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +21,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.reclick.framework.App;
+import com.reclick.framework.Prefs;
+import com.reclick.request.Request;
+import com.reclick.request.Request.RequestObject;
+import com.reclick.request.Request.RequestType;
+import com.reclick.request.Urls;
 
 public class LoginActivity extends Activity {
 
