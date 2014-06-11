@@ -1,19 +1,12 @@
 package com.reclick.reclick;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import unite.Client;
-import unite.Response;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
