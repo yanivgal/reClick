@@ -35,7 +35,7 @@ public class SplashActivity extends Activity {
 		if (Prefs.getUsername(this).isEmpty()) {
 			intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
 		} else {
-			intent = new Intent(this, com.reclick.reclick.MainActivity.class);
+			intent = new Intent(this, com.reclick.reclick.GameActivity.class);
 		}
 		
 		startActivity(intent);
