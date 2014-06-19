@@ -81,7 +81,7 @@ public class LoginActivity extends Activity {
 				Prefs.setNickname(this, response.getString("nickname"));
 
 				Intent intent = new Intent(this,
-						com.reclick.reclick.MainActivity.class);
+						com.reclick.reclick.GameActivity.class);
 				startActivity(intent);
 				finish();
 			}
@@ -114,7 +114,7 @@ public class LoginActivity extends Activity {
 				Prefs.setNickname(this, response.getString("nickname"));
 
 				Intent intent = new Intent(this,
-						com.reclick.reclick.MainActivity.class);
+						com.reclick.reclick.GameActivity.class);
 				startActivity(intent);
 				finish();
 			}
