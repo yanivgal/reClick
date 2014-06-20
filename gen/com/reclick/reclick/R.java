@@ -426,45 +426,48 @@ containing a value of this type.
         public static final int yellow_button_image=0x7f020032;
     }
     public static final class id {
-        public static final int action_settings=0x7f060026;
-        public static final int blueButtonId=0x7f060014;
+        public static final int action_settings=0x7f060029;
         public static final int book_now=0x7f060010;
-        public static final int button1=0x7f060018;
+        public static final int button1=0x7f06001b;
         public static final int buyButton=0x7f06000a;
         public static final int buy_now=0x7f06000f;
         public static final int buy_with_google=0x7f06000e;
         public static final int classic=0x7f060011;
+        public static final int game_activity_blue_button=0x7f060016;
+        public static final int game_activity_green_button=0x7f060017;
+        public static final int game_activity_red_button=0x7f060019;
+        public static final int game_activity_yellow_button=0x7f06001a;
+        public static final int game_bottom_pair_buttons_layout=0x7f060018;
+        public static final int game_main_linear_layout=0x7f060014;
+        public static final int game_top_pair_buttons_layout=0x7f060015;
         public static final int grayscale=0x7f060012;
-        public static final int greenButtonId=0x7f060015;
         public static final int holo_dark=0x7f060005;
         public static final int holo_light=0x7f060006;
         public static final int hybrid=0x7f060004;
-        public static final int login_activity_login_btn=0x7f060022;
-        public static final int login_activity_login_here_link=0x7f060024;
-        public static final int login_activity_main_content=0x7f060019;
-        public static final int login_activity_nickname_container=0x7f06001f;
-        public static final int login_activity_nickname_input=0x7f060021;
-        public static final int login_activity_nickname_label=0x7f060020;
-        public static final int login_activity_password_input=0x7f06001e;
-        public static final int login_activity_password_label=0x7f06001d;
-        public static final int login_activity_sign_up_here_link=0x7f060025;
-        public static final int login_activity_signup_btn=0x7f060023;
-        public static final int login_activity_username_input=0x7f06001c;
-        public static final int login_activity_username_label=0x7f06001b;
-        public static final int logo=0x7f06001a;
+        public static final int login_activity_login_btn=0x7f060025;
+        public static final int login_activity_login_here_link=0x7f060027;
+        public static final int login_activity_main_content=0x7f06001c;
+        public static final int login_activity_nickname_container=0x7f060022;
+        public static final int login_activity_nickname_input=0x7f060024;
+        public static final int login_activity_nickname_label=0x7f060023;
+        public static final int login_activity_password_input=0x7f060021;
+        public static final int login_activity_password_label=0x7f060020;
+        public static final int login_activity_sign_up_here_link=0x7f060028;
+        public static final int login_activity_signup_btn=0x7f060026;
+        public static final int login_activity_username_input=0x7f06001f;
+        public static final int login_activity_username_label=0x7f06001e;
+        public static final int logo=0x7f06001d;
         public static final int match_parent=0x7f06000c;
         public static final int monochrome=0x7f060013;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int production=0x7f060007;
-        public static final int redButtonId=0x7f060016;
         public static final int sandbox=0x7f060008;
         public static final int satellite=0x7f060002;
         public static final int selectionDetails=0x7f06000b;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
         public static final int wrap_content=0x7f06000d;
-        public static final int yellowButtonId=0x7f060017;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -633,23 +636,32 @@ containing a value of this type.
     
          */
         public static final int WalletFragmentDefaultStyle=0x7f080003;
-        public static final int basic_container=0x7f08000d;
+        public static final int basic_container=0x7f080016;
         public static final int footer_img=0x7f080007;
-        public static final int login_activity_button=0x7f080015;
-        public static final int login_activity_input=0x7f080013;
-        public static final int login_activity_input_password=0x7f080014;
-        public static final int login_activity_label=0x7f08000f;
-        public static final int login_activity_label_blue=0x7f080011;
-        public static final int login_activity_label_green=0x7f080012;
-        public static final int login_activity_label_red=0x7f080010;
-        public static final int login_activity_text=0x7f080016;
-        public static final int logo=0x7f080008;
-        public static final int logo_login_activity=0x7f08000e;
-        public static final int main_container=0x7f08000a;
-        public static final int main_content=0x7f08000b;
-        public static final int main_content_splash=0x7f08000c;
+        public static final int game_activity_game_image_button=0x7f08000c;
+        public static final int game_activity_game_image_button_blue=0x7f08000d;
+        public static final int game_activity_game_image_button_green=0x7f08000e;
+        public static final int game_activity_game_image_button_red=0x7f08000f;
+        public static final int game_activity_game_image_button_yellow=0x7f080010;
+        public static final int game_activity_main_linear_layout=0x7f080008;
+        public static final int game_activity_pair_buttons_layout=0x7f080009;
+        public static final int game_activity_pair_buttons_layout_bottom=0x7f08000b;
+        public static final int game_activity_pair_buttons_layout_top=0x7f08000a;
+        public static final int login_activity_button=0x7f08001e;
+        public static final int login_activity_input=0x7f08001c;
+        public static final int login_activity_input_password=0x7f08001d;
+        public static final int login_activity_label=0x7f080018;
+        public static final int login_activity_label_blue=0x7f08001a;
+        public static final int login_activity_label_green=0x7f08001b;
+        public static final int login_activity_label_red=0x7f080019;
+        public static final int login_activity_text=0x7f08001f;
+        public static final int logo=0x7f080011;
+        public static final int logo_login_activity=0x7f080017;
+        public static final int main_container=0x7f080013;
+        public static final int main_content=0x7f080014;
+        public static final int main_content_splash=0x7f080015;
         public static final int main_footer=0x7f080006;
-        public static final int text_shadow=0x7f080009;
+        public static final int text_shadow=0x7f080012;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.
