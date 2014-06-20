@@ -1,10 +1,17 @@
 package com.reclick.reclick;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import unite.Client;
+import unite.OnResponseListener;
+import unite.Response;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,12 +24,9 @@ import android.widget.TextView;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
-import com.reclick.request.Request;
-import com.reclick.request.Request.RequestObject;
-import com.reclick.request.Request.RequestType;
 import com.reclick.request.Urls;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements OnResponseListener {
 
 	private final String TAG = this.getClass().getSimpleName();
 
@@ -39,7 +43,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-
+		
 		nicknameContainer = (LinearLayout) findViewById(
 				R.id.login_activity_nickname_container);
 
@@ -71,24 +75,8 @@ public class LoginActivity extends Activity {
 			return;
 		}
 
-		JSONObject response = sendLoginRequest(username, password,
-				Prefs.getGcmRegId(this));
-
-		try {
-			if (response.getString("status").equals("success")) {
-
-				Prefs.setUsername(this, response.getString("username"));
-				Prefs.setNickname(this, response.getString("nickname"));
-
-				Intent intent = new Intent(this,
-						com.reclick.reclick.GameActivity.class);
-				startActivity(intent);
-				finish();
-			}
-			App.showToast(this, response.getString("message"));
-		} catch (JSONException e) {
-			Log.e(TAG, e.getMessage());
-		}
+		sendSessionRequest(Urls.login(this),
+				loginParamsToList(username, password, Prefs.getGcmRegId(this)));
 	}
 
 	public void signup(View v) {
@@ -105,23 +93,8 @@ public class LoginActivity extends Activity {
 			return;
 		}
 
-		JSONObject response = sendSignUpRequest(username, password, nickname,
-				Prefs.getGcmRegId(this));
-
-		try {
-			if (response.getString("status").equals("success")) {
-				Prefs.setUsername(this, response.getString("username"));
-				Prefs.setNickname(this, response.getString("nickname"));
-
-				Intent intent = new Intent(this,
-						com.reclick.reclick.GameActivity.class);
-				startActivity(intent);
-				finish();
-			}
-			App.showToast(this, response.getString("message"));
-		} catch (JSONException e) {
-			Log.e(TAG, e.getMessage());
-		}
+		sendSessionRequest(Urls.signup(this), signUpParamsToList(username, password, nickname,
+				Prefs.getGcmRegId(this)));
 	}
 
 	public void loginLink(View v) {
@@ -141,51 +114,60 @@ public class LoginActivity extends Activity {
 		signUpBtn.setVisibility(View.VISIBLE);
 		loginLink.setVisibility(View.VISIBLE);
 	}
-
-	private JSONObject sendLoginRequest(
-			String username,
-			String password,
-			String gcmRegId) {
-		JSONObject response = null;
-
-		RequestObject ro = new RequestObject(Urls.login(this), RequestType.POST);
-		ro.addParameter("username", username);
-		ro.addParameter("password", App.md5(password));
-		ro.addParameter("gcmRegId", gcmRegId);
-
-		try {
-			response = new Request(ro).execute().get();
-		} catch (InterruptedException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (ExecutionException e) {
-			Log.e(TAG, e.getMessage());
-		}
-
-		return response;
+	
+	/**
+	 * 
+	 */
+	private List<NameValuePair> loginParamsToList(String username,
+			String password, String gcmRegId) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("username", username));
+		params.add(new BasicNameValuePair("password", App.md5(password)));
+		params.add(new BasicNameValuePair("gcmRegId", gcmRegId));
+		return params;
+	}
+	
+	/**
+	 * 
+	 */
+	private List<NameValuePair> signUpParamsToList(String username,
+			String password, String nickname, String gcmRegId) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("username", username));
+		params.add(new BasicNameValuePair("password", App.md5(password)));
+		params.add(new BasicNameValuePair("nickname", nickname));
+		params.add(new BasicNameValuePair("gcmRegId", gcmRegId));
+		return params;
+	}
+	
+	private void sendSessionRequest(String url, List<NameValuePair> params) {
+		new Client()
+		.post(url)
+		.setHeader("content-type", "application/json")
+		.setParams(params)
+		.send(this);
 	}
 
-	private JSONObject sendSignUpRequest(
-			String username,
-			String password,
-			String nickname,
-			String gcmRegId) {
-		JSONObject response = null;
-
-		RequestObject ro = new RequestObject(Urls.signup(this),
-				RequestType.POST);
-		ro.addParameter("username", username);
-		ro.addParameter("password", App.md5(password));
-		ro.addParameter("nickname", nickname);
-		ro.addParameter("gcmRegId", gcmRegId);
-
-		try {
-			response = new Request(ro).execute().get();
-		} catch (InterruptedException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (ExecutionException e) {
-			Log.e(TAG, e.getMessage());
+	@Override
+	public void onResponseReceived(Response response) {
+		if (response.getStatusCode() != HttpStatus.SC_OK) {
+			Log.e(TAG, response.getErrorMsg());
+			return;
 		}
+		try {
+			JSONObject jsonResponse = new JSONObject(response.getContent());
+			if (jsonResponse.getString("status").equals("success")) {
+				Prefs.setUsername(LoginActivity.this,
+						jsonResponse.getJSONObject("data").getString("username"));
+				Prefs.setNickname(LoginActivity.this,
+						jsonResponse.getJSONObject("data").getString("nickname"));
 
-		return response;
+				startActivity(new Intent(LoginActivity.this, GameActivity.class));
+				finish();
+			}
+			App.showToast(LoginActivity.this, jsonResponse.getString("message"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

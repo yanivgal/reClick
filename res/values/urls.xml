@@ -4,6 +4,6 @@
     <string name="host">10.8.4.70</string>
     <string name="path">reclick</string>
     <string name="method_login">login</string>
-    <string name="method_sign_up">signup</string>
+    <string name="method_sign_up">sign-up</string>
     
 </resources>
