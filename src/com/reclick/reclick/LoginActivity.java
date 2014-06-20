@@ -142,10 +142,10 @@ public class LoginActivity extends Activity implements OnResponseListener {
 	
 	private void sendSessionRequest(String url, List<NameValuePair> params) {
 		new Client()
-		.post(url)
-		.setHeader("content-type", "application/json")
-		.setParams(params)
-		.send(this);
+			.post(url)
+			.setHeader("content-type", "application/json")
+			.setParams(params)
+			.send(this);
 	}
 
 	@Override
@@ -155,13 +155,12 @@ public class LoginActivity extends Activity implements OnResponseListener {
 			return;
 		}
 		try {
-			JSONObject jsonResponse = new JSONObject(response.getContent());
+			JSONObject jsonResponse = response.getJsonBody();
 			if (jsonResponse.getString("status").equals("success")) {
 				Prefs.setUsername(LoginActivity.this,
 						jsonResponse.getJSONObject("data").getString("username"));
 				Prefs.setNickname(LoginActivity.this,
 						jsonResponse.getJSONObject("data").getString("nickname"));
-
 				startActivity(new Intent(LoginActivity.this, GameActivity.class));
 				finish();
 			}

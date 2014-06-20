@@ -5,65 +5,40 @@
     <include layout="@layout/footer" />
 
     <LinearLayout
-        style="@style/main_content.splash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical" >
+        android:id="@+id/game_main_linear_layout"
+        style="@style/game_activity_main_linear_layout" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal" >
+            android:id="@+id/game_top_pair_buttons_layout"
+            style="@style/game_activity_pair_buttons_layout.top" >
 
             <ImageButton
-                android:id="@+id/blueButtonId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:onClick="blueButtonClicked"
-                android:src="@drawable/blue_button" />
+                android:id="@+id/game_activity_blue_button"
+                style="@style/game_activity_game_image_button.blue"
+                android:contentDescription="@null" />
 
             <ImageButton
-                android:id="@+id/greenButtonId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:onClick="greenButtonClicked"
-                android:src="@drawable/green_button" />
+                android:id="@+id/game_activity_green_button"
+                style="@style/game_activity_game_image_button.green"
+                android:contentDescription="@null" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal" >
+            android:id="@+id/game_bottom_pair_buttons_layout"
+            style="@style/game_activity_pair_buttons_layout.bottom" >
 
             <ImageButton
-                android:id="@+id/redButtonId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:onClick="redButtonClicked"
-                android:src="@drawable/red_button" />
+                android:id="@+id/game_activity_red_button"
+                style="@style/game_activity_game_image_button.red"
+                android:contentDescription="@null" />
 
             <ImageButton
-                android:id="@+id/yellowButtonId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:onClick="yellowButtonClicked"
-                android:src="@drawable/yellow_button" />
+                android:id="@+id/game_activity_yellow_button"
+                style="@style/game_activity_game_image_button.yellow"
+                android:contentDescription="@null" />
         </LinearLayout>
+
+        <!-- Temporrary -->
 
         <Button
             android:id="@+id/button1"
@@ -71,6 +46,7 @@
             android:layout_height="wrap_content"
             android:onClick="signOut"
             android:text="Sign Out" />
+        <!-- Temporrary -->
 
     </LinearLayout>
 
