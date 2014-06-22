@@ -15,11 +15,13 @@
             <ImageButton
                 android:id="@+id/game_activity_blue_button"
                 style="@style/game_activity_game_image_button.blue"
+                android:onClick="blueButtonClicked"
                 android:contentDescription="@null" />
 
             <ImageButton
                 android:id="@+id/game_activity_green_button"
                 style="@style/game_activity_game_image_button.green"
+                android:onClick="greenButtonClicked"
                 android:contentDescription="@null" />
         </LinearLayout>
 
@@ -30,11 +32,13 @@
             <ImageButton
                 android:id="@+id/game_activity_red_button"
                 style="@style/game_activity_game_image_button.red"
+                android:onClick="redButtonClicked"
                 android:contentDescription="@null" />
 
             <ImageButton
                 android:id="@+id/game_activity_yellow_button"
                 style="@style/game_activity_game_image_button.yellow"
+                android:onClick="yellowButtonClicked"
                 android:contentDescription="@null" />
         </LinearLayout>
 

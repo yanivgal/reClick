@@ -5,5 +5,7 @@
     <string name="path">reclick</string>
     <string name="method_login">login</string>
     <string name="method_sign_up">sign-up</string>
+    <string name="method_get_games">games</string>
+    <string name="method_add_player_to_games">games</string>
     
 </resources>

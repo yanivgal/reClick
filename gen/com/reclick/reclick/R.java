@@ -426,7 +426,7 @@ containing a value of this type.
         public static final int yellow_button_image=0x7f020032;
     }
     public static final class id {
-        public static final int action_settings=0x7f060029;
+        public static final int action_settings=0x7f060033;
         public static final int book_now=0x7f060010;
         public static final int button1=0x7f06001b;
         public static final int buyButton=0x7f06000a;
@@ -457,6 +457,16 @@ containing a value of this type.
         public static final int login_activity_username_input=0x7f06001f;
         public static final int login_activity_username_label=0x7f06001e;
         public static final int logo=0x7f06001d;
+        public static final int main_activity_create_new_game_button=0x7f060029;
+        public static final int main_activity_current_user_games_list=0x7f06002d;
+        public static final int main_activity_current_user_games_textView=0x7f06002c;
+        public static final int main_activity_games_row_game_description=0x7f060031;
+        public static final int main_activity_games_row_game_name=0x7f06002f;
+        public static final int main_activity_games_row_game_num_of_players=0x7f060030;
+        public static final int main_activity_join_or_enter_game_button=0x7f060032;
+        public static final int main_activity_open_games_list=0x7f06002b;
+        public static final int main_activity_open_games_textView=0x7f06002a;
+        public static final int main_games_lists_row=0x7f06002e;
         public static final int match_parent=0x7f06000c;
         public static final int monochrome=0x7f060013;
         public static final int none=0x7f060000;
@@ -476,7 +486,9 @@ containing a value of this type.
         public static final int footer=0x7f030000;
         public static final int game=0x7f030001;
         public static final int login=0x7f030002;
-        public static final int splash=0x7f030003;
+        public static final int main=0x7f030003;
+        public static final int main_games_row=0x7f030004;
+        public static final int splash=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -581,7 +593,7 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f04001e;
         public static final int gcm_sender_id=0x7f040020;
         public static final int hello_world=0x7f040023;
-        public static final int host=0x7f04002e;
+        public static final int host=0x7f040035;
         public static final int login_activity_fill_all_fields_login=0x7f04002b;
         public static final int login_activity_fill_all_fields_sign_up=0x7f04002c;
         public static final int login_activity_login_btn=0x7f040027;
@@ -591,10 +603,19 @@ containing a value of this type.
         public static final int login_activity_sign_up_here_link=0x7f04002a;
         public static final int login_activity_signup_btn=0x7f040028;
         public static final int login_activity_username_label=0x7f040024;
-        public static final int method_login=0x7f040030;
-        public static final int method_sign_up=0x7f040031;
-        public static final int path=0x7f04002f;
-        public static final int scheme=0x7f04002d;
+        public static final int main_activity_create_new_game_button_text=0x7f04002d;
+        public static final int main_activity_current_user_games_textview_text=0x7f040030;
+        public static final int main_activity_games_row_game_default_description=0x7f040032;
+        public static final int main_activity_games_row_game_default_name=0x7f040031;
+        public static final int main_activity_games_row_game_default_num_of_players=0x7f040033;
+        public static final int main_activity_join_or_enter_game_button_default_text=0x7f04002f;
+        public static final int main_activity_open_games_textview_text=0x7f04002e;
+        public static final int method_add_player_to_games=0x7f04003a;
+        public static final int method_get_games=0x7f040039;
+        public static final int method_login=0x7f040037;
+        public static final int method_sign_up=0x7f040038;
+        public static final int path=0x7f040036;
+        public static final int scheme=0x7f040034;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

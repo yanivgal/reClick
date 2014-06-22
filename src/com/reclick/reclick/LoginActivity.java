@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +17,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,6 +46,8 @@ public class LoginActivity extends Activity implements OnResponseListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		
+		((LinearLayout) findViewById(R.id.login_activity_main_content)).setOnTouchListener(onTouchListener);
 		
 		nicknameContainer = (LinearLayout) findViewById(
 				R.id.login_activity_nickname_container);
@@ -143,7 +148,7 @@ public class LoginActivity extends Activity implements OnResponseListener {
 	private void sendSessionRequest(String url, List<NameValuePair> params) {
 		new Client()
 			.post(url)
-			.setHeader("content-type", "application/json")
+			.setHeader(HTTP.CONTENT_TYPE, "application/json")
 			.setParams(params)
 			.send(this);
 	}
@@ -161,7 +166,7 @@ public class LoginActivity extends Activity implements OnResponseListener {
 						jsonResponse.getJSONObject("data").getString("username"));
 				Prefs.setNickname(LoginActivity.this,
 						jsonResponse.getJSONObject("data").getString("nickname"));
-				startActivity(new Intent(LoginActivity.this, GameActivity.class));
+				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 				finish();
 			}
 			App.showToast(LoginActivity.this, jsonResponse.getString("message"));
@@ -169,4 +174,13 @@ public class LoginActivity extends Activity implements OnResponseListener {
 			e.printStackTrace();
 		}
 	}
+
+	private OnTouchListener onTouchListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			App.hideSoftKeyboard(LoginActivity.this);
+			return true;
+		}
+	};
 }
