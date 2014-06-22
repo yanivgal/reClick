@@ -8,6 +8,8 @@ public class Urls {
 	
 	private static final String LOGIN = "method_login";
 	private static final String SIGN_UP = "method_sign_up";
+	private static final String GET_GAMES = "method_get_games";
+	private static final String ADD_PLAYER_TO_GAME = "method_add_player_to_games";
 
 	public static String login(Context context) {
 		return buildUrl(context, LOGIN);
@@ -15,6 +17,14 @@ public class Urls {
 	
 	public static String signup(Context context) {
 		return buildUrl(context, SIGN_UP);
+	}
+	
+	public static String getGames(Context context) {
+		return buildUrl(context, GET_GAMES);
+	}
+	
+	public static String addPlayerToGame(Context context) {
+		return buildUrl(context, ADD_PLAYER_TO_GAME);
 	}
 	
 	private static String buildUrl(Context context, String method) {
