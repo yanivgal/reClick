@@ -23,11 +23,13 @@ public class Urls {
 	public static String addPlayerToGame(Context context, String gameId, String username) {
 		return buildUrl(context,
 						context.getString(R.string.games_collection)
-						+ File.separator
-						+ gameId
-						+ context.getString(R.string.players_collection)
-						+ File.separator
-						+ username);
+							+ File.separator
+							+ gameId
+							+ File.separator
+							+ context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
+						);
 	}
 	
 	private static String buildUrl(Context context, String pathSuffix) {

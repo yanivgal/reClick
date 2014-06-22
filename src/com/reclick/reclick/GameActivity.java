@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class GameActivity extends Activity {
 	
-	private final String TAG = this.getClass().getSimpleName();
+//	private final String TAG = this.getClass().getSimpleName();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

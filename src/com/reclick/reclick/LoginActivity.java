@@ -148,7 +148,7 @@ public class LoginActivity extends Activity implements OnResponseListener {
 	private void sendSessionRequest(String url, List<NameValuePair> params) {
 		new Client()
 			.post(url)
-			.setHeader(HTTP.CONTENT_TYPE, "application/json")
+			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
 			.setParams(params)
 			.send(this);
 	}
