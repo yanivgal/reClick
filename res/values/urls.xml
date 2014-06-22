@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="scheme">http</string>
+    
     <string name="host">192.168.14.130</string>
-    <string name="path">reclick</string>
+    
+    <string name="path_prefix">reclick</string>
+    
     <string name="method_login">login</string>
     <string name="method_sign_up">sign-up</string>
-    <string name="method_get_games">games</string>
-    <string name="method_add_player_to_games">games</string>
     
+    <string name="games_collection">games</string>
+    <string name="players_collection">players</string>
+
 </resources>
