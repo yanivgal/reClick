@@ -92,7 +92,7 @@ public class GamesAdapter extends BaseAdapter {
 			holder.gameName.setText(currentGame.getString("name"));
 			holder.gameDescription.setText(currentGame.getString("description"));
 			holder.numOfPlayers.setText(currentGame.getString("numOfPlayers"));
-			holder.gameId = currentGame.getString("GameId");
+			holder.gameId = currentGame.getString("id");
 			if (isCurrUserGames) {
 				holder.joinOrEnter.setText("Enter");
 			}
@@ -114,8 +114,6 @@ public class GamesAdapter extends BaseAdapter {
 			new Client()
 				.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
 				.setHeader(HTTP.CONTENT_TYPE, "application/json")
-				.addParam("gameId", gameId)
-				.addParam("username", Prefs.getUsername(context))
 				.setOnResponseListener(new OnResponseListener() {
 					
 					@Override
