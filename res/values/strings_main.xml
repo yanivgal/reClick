@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="main_activity_settings_button_text">Settings</string>
     <string name="main_activity_create_new_game_button_text">Create a new game</string>
     <string name="main_activity_open_games_textview_text">Open games</string>
     <string name="main_activity_join_or_enter_game_button_default_text">Join</string>
