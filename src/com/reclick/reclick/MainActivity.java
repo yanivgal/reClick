@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.reclick.framework.App;
@@ -41,9 +40,8 @@ public class MainActivity extends Activity {
 	private void sendGetOpenGamesListRequest() {
 		new Client()
 			.get(Urls.getGames(this))
-			.setHeader(HTTP.CONTENT_TYPE, "application/json")
-			.setOnResponseListener(onOpenGamesResponseListener)
-			.send();
+			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
+			.send(onOpenGamesResponseListener);
 	}
 	
 	private OnResponseListener onOpenGamesResponseListener = new OnResponseListener() {
@@ -72,10 +70,9 @@ public class MainActivity extends Activity {
 	private void sendGetCurrentUserGamesListRequest() {
 		new Client()
 			.get(Urls.getGames(this))
-			.setHeader(HTTP.CONTENT_TYPE, "application/json")
+			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
 			.addParam("username", Prefs.getUsername(this))
-			.setOnResponseListener(onCurrUserGamesResponseListener)
-			.send();
+			.send(onCurrUserGamesResponseListener);
 	}
 	
 	private OnResponseListener onCurrUserGamesResponseListener = new OnResponseListener() {

@@ -1,5 +1,6 @@
 package com.reclick.reclick;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,12 +9,10 @@ import org.json.JSONObject;
 import unite.Client;
 import unite.OnResponseListener;
 import unite.Response;
-
-import com.reclick.framework.App;
-import com.reclick.framework.Prefs;
-import com.reclick.request.Urls;
-
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +20,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.reclick.framework.Prefs;
+import com.reclick.request.Urls;
 
 public class GamesAdapter extends BaseAdapter {
 	
+	private final String TAG = this.getClass().getSimpleName();
 	private Context context;
 	private JSONArray games;
 	private boolean isCurrUserGames;
@@ -108,19 +110,29 @@ public class GamesAdapter extends BaseAdapter {
 		
 		@Override
 		public void onClick(View view) {
-			App.showToast(context, isCurrUserGames ? "Enter" : "Join"); // TODO: REMOVE THIS!!!!!
-			
-			String gameId = ((ViewHolder) ((View) view.getParent()).getTag()).gameId;
-			new Client()
-				.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
-				.setHeader(HTTP.CONTENT_TYPE, "application/json")
-				.setOnResponseListener(new OnResponseListener() {
-					
-					@Override
-					public void onResponseReceived(Response response) {
-						
-					}
-				});
+			if (isCurrUserGames) { // in case user want's to enter to one of his games.
+				context.startActivity(new Intent(context, GameActivity.class));
+				((Activity) context).finish();
+			} else { // in case user want's to join to one of the open games list.
+				String gameId = ((ViewHolder) ((View) view.getParent()).getTag()).gameId;
+				new Client()
+					.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
+					.setHeader(HTTP.CONTENT_TYPE, context.getString(R.string.application_json))
+					.send(onResponseListener);
+			}
+		}
+	};
+	
+	private OnResponseListener onResponseListener = new OnResponseListener() {
+		
+		@Override
+		public void onResponseReceived(Response response) {
+			if (response.getStatusCode() != HttpStatus.SC_OK) {
+				Log.e(TAG, response.getBody());
+				return;
+			}
+			context.startActivity(new Intent(context, GameActivity.class));
+			((Activity) context).finish();
 		}
 	};
 }
