@@ -8,18 +8,14 @@ import java.util.concurrent.Executors;
 import org.apache.http.protocol.HTTP;
 
 import unite.Client;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
@@ -33,11 +29,6 @@ public class GameActivity extends Activity {
 	
 	ArrayList<String> sequence;
 	
-	ImageButton blueTile;
-	ImageButton greenTile;
-	ImageButton redTile;
-	ImageButton yellowTile;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +39,6 @@ public class GameActivity extends Activity {
 			sequenceString = extras.getString("sequence");
 		}
 		if (gameId == null || sequenceString == null) {
-			// TODO decide how to handle this
 			App.showToast(this, "Can't instantiate game");
 			finish();
 			return;
@@ -58,11 +48,6 @@ public class GameActivity extends Activity {
 		
 		sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
 		
-//		blueTile = (ImageButton) findViewById(R.id.game_activity_blue_button);
-//		greenTile = (ImageButton) findViewById(R.id.game_activity_green_button);
-//		redTile = (ImageButton) findViewById(R.id.game_activity_red_button);
-//		yellowTile = (ImageButton) findViewById(R.id.game_activity_yellow_button);
-
 		animateLastSequence();	
 	}
 	
@@ -114,7 +99,7 @@ public class GameActivity extends Activity {
 			.addParam("sequence", sequenceString)
 			.send();
 		
-		App.showToast(this, sequenceString);
+		App.showToast(this, "Nice Move");
 	}
 	
 	private void playerFailed() {
@@ -122,22 +107,13 @@ public class GameActivity extends Activity {
 			.delete(Urls.deletePlayerFromGame(this, gameId, Prefs.getUsername(this)))
 			.send();
 		
-		App.showToast(this, "Fail");
+		App.showToast(this, "Game Over");
 	}
 	
 	private boolean correctStep(int tileNum) {
 		int sequenceStep = Integer.parseInt(sequence.remove(0));
 		return tileNum == sequenceStep;
 	}
-	
-	public void signOut(View v) {
-		Prefs.removePref(this, Prefs.PROPERTY_USERNAME);
-		Intent intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
-		startActivity(intent);
-		finish();
-	}
-	
-	
 
 	private void animateLastSequence() {
 		final Handler handler = new Handler();
@@ -194,5 +170,12 @@ public class GameActivity extends Activity {
 	private ImageButton getTile(int tileNum) {
 		int id = getResources().getIdentifier("tile_" + tileNum, "id", getPackageName());
 		return (ImageButton) findViewById(id);
+	}
+	
+	public void settingsButtonClicked(View view) {
+		Prefs.removePref(this, Prefs.PROPERTY_USERNAME);
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
 }
