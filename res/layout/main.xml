@@ -4,6 +4,16 @@
 
     <include layout="@layout/footer" />
 
+    <ImageButton
+        android:id="@+id/main_activity_settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="settingsButtonClicked"
+        android:src="@drawable/settings_button"
+        android:contentDescription="@null"
+        android:background="@null"
+        android:text="@string/main_activity_settings_button_text" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
