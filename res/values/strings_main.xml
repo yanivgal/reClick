@@ -5,8 +5,8 @@
     <string name="main_activity_open_games_textview_text">Open games</string>
     <string name="main_activity_join_or_enter_game_button_default_text">Join</string>
     <string name="main_activity_current_user_games_textview_text">Your games</string>
-    <string name="main_activity_games_row_game_default_name">Name</string>
-    <string name="main_activity_games_row_game_default_description">Descrip</string>
-    <string name="main_activity_games_row_game_default_num_of_players">Players</string>
+    <string name="main_activity_games_row_game_default_name">Game Name</string>
+    <string name="main_activity_games_row_game_default_description">Game Description</string>
+    <string name="main_activity_games_row_game_default_num_of_players">Number Of Players</string>
 
 </resources>

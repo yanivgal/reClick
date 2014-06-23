@@ -1,44 +1,44 @@
 package com.reclick.request;
 
+import java.io.File;
+
 import com.reclick.reclick.R;
 
 import android.content.Context;
 
 public class Urls {
-	
-	private static final String LOGIN = "method_login";
-	private static final String SIGN_UP = "method_sign_up";
-	private static final String GET_GAMES = "method_get_games";
-	private static final String ADD_PLAYER_TO_GAME = "method_add_player_to_games";
 
 	public static String login(Context context) {
-		return buildUrl(context, LOGIN);
+		return buildUrl(context, context.getString(R.string.method_login));
 	}
 	
 	public static String signup(Context context) {
-		return buildUrl(context, SIGN_UP);
+		return buildUrl(context, context.getString(R.string.method_sign_up));
 	}
 	
 	public static String getGames(Context context) {
-		return buildUrl(context, GET_GAMES);
+		return buildUrl(context, context.getString(R.string.games_collection));
 	}
 	
-	public static String addPlayerToGame(Context context) {
-		return buildUrl(context, ADD_PLAYER_TO_GAME);
+	public static String addPlayerToGame(Context context, String gameId, String username) {
+		return buildUrl(context,
+						context.getString(R.string.games_collection)
+						+ File.separator
+						+ gameId
+						+ context.getString(R.string.players_collection)
+						+ File.separator
+						+ username);
 	}
 	
-	private static String buildUrl(Context context, String method) {
+	private static String buildUrl(Context context, String pathSuffix) {
 		return context.getString(R.string.scheme)
-				+ "://"
+				+ File.pathSeparator
+				+ File.separator
+				+ File.separator
 				+ context.getString(R.string.host)
-				+ "/"
-				+ context.getString(R.string.path)
-				+ "/"
-				+ context.getString(getStringIdentifier(context, method));
-	}
-	
-	private static int getStringIdentifier(Context context, String name) {
-	    return context.getResources().getIdentifier(
-	    		name, "string", context.getPackageName());
+				+ File.separator
+				+ context.getString(R.string.path_prefix)
+				+ File.separator
+				+ pathSuffix;
 	}
 }

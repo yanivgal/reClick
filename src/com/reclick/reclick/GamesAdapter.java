@@ -6,6 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import unite.Client;
+import unite.OnResponseListener;
+import unite.Response;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
@@ -50,11 +52,19 @@ public class GamesAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public long getItemId(int position) {
-		return position;
+	public long getItemId(int position) { // returns the game id of the game in the given position.
+		try {
+			return Long.parseLong(((JSONObject)games.get(position)).getString("gameId"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	private class ViewHolder {
+		String gameId;
 		TextView gameName;
 		TextView gameDescription;
 		TextView numOfPlayers;
@@ -78,9 +88,11 @@ public class GamesAdapter extends BaseAdapter {
 		}
 		
 		try {
-			holder.gameName.setText(((JSONObject)games.get(position)).getString("name"));
-			holder.gameDescription.setText(((JSONObject)games.get(position)).getString("description"));
-			holder.numOfPlayers.setText(((JSONObject)games.get(position)).getString("numOfPlayers"));
+			JSONObject currentGame = (JSONObject)games.get(position);
+			holder.gameName.setText(currentGame.getString("name"));
+			holder.gameDescription.setText(currentGame.getString("description"));
+			holder.numOfPlayers.setText(currentGame.getString("numOfPlayers"));
+			holder.gameId = currentGame.getString("GameId");
 			if (isCurrUserGames) {
 				holder.joinOrEnter.setText("Enter");
 			}
@@ -89,7 +101,6 @@ public class GamesAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 		
-		
 		return convertView;
 	}
 	
@@ -97,17 +108,21 @@ public class GamesAdapter extends BaseAdapter {
 		
 		@Override
 		public void onClick(View view) {
-			App.showToast(context, isCurrUserGames ? "Enter" : "Join");
-////			new Client()
-////				.get(Urls.getOpenGames(this))
-////				.setHeader(HTTP.CONTENT_TYPE, "application/json")
-////				.setOnResponseListener(onCurrUserGamesResponseListener)
-////				.send();
-//			new Client()
-//				.post(Urls.addPlayerToGame(context))
-//				.setHeader(HTTP.CONTENT_TYPE, "application/json")
-//				.addParam("gameId", )
-//				.addParam("username", Prefs.getUsername(context))
+			App.showToast(context, isCurrUserGames ? "Enter" : "Join"); // TODO: REMOVE THIS!!!!!
+			
+			String gameId = ((ViewHolder) ((View) view.getParent()).getTag()).gameId;
+			new Client()
+				.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
+				.setHeader(HTTP.CONTENT_TYPE, "application/json")
+				.addParam("gameId", gameId)
+				.addParam("username", Prefs.getUsername(context))
+				.setOnResponseListener(new OnResponseListener() {
+					
+					@Override
+					public void onResponseReceived(Response response) {
+						
+					}
+				});
 		}
 	};
 }

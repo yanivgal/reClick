@@ -591,6 +591,7 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f04001e;
+        public static final int games_collection=0x7f040039;
         public static final int gcm_sender_id=0x7f040020;
         public static final int hello_world=0x7f040023;
         public static final int host=0x7f040035;
@@ -610,11 +611,10 @@ containing a value of this type.
         public static final int main_activity_games_row_game_default_num_of_players=0x7f040033;
         public static final int main_activity_join_or_enter_game_button_default_text=0x7f04002f;
         public static final int main_activity_open_games_textview_text=0x7f04002e;
-        public static final int method_add_player_to_games=0x7f04003a;
-        public static final int method_get_games=0x7f040039;
         public static final int method_login=0x7f040037;
         public static final int method_sign_up=0x7f040038;
-        public static final int path=0x7f040036;
+        public static final int path_prefix=0x7f040036;
+        public static final int players_collection=0x7f04003a;
         public static final int scheme=0x7f040034;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
