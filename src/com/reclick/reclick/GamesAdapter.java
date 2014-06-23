@@ -127,6 +127,7 @@ public class GamesAdapter extends BaseAdapter {
 				Intent intent = new Intent(context, GameActivity.class);
 				intent.putExtra("gameId", gameId);
 				intent.putExtra("sequence", sequence);
+				intent.putExtra("started", started);
 				context.startActivity(intent);
 			} else { // in case user want's to join to one of the open games list.
 				new Client()
@@ -159,6 +160,7 @@ public class GamesAdapter extends BaseAdapter {
 				Intent intent = new Intent(context, GameActivity.class);
 				intent.putExtra("gameId", gameId);
 				intent.putExtra("sequence", sequence);
+				intent.putExtra("started", started);
 				context.startActivity(intent);
 			}
 		}

@@ -10,6 +10,7 @@ import unite.Client;
 import unite.OnResponseListener;
 import unite.Response;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,13 @@ public class MainActivity extends Activity {
 		
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
+	}
+	
+	public void settingsButtonClicked(View view) {
+		Prefs.removePref(this, Prefs.PROPERTY_USERNAME);
+		Intent intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
 	
 	public void createGameButtonClicked(View view) {
