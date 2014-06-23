@@ -20,7 +20,6 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game);
 		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -33,6 +32,8 @@ public class GameActivity extends Activity {
 			finish();
 			return;
 		}
+		
+		setContentView(R.layout.game);
 	}
 	
 	public void blueButtonClicked(View view) {

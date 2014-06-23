@@ -31,6 +31,10 @@ public class GamesAdapter extends BaseAdapter {
 	private JSONArray games;
 	private boolean isCurrUserGames;
 	
+	private String gameId;
+	private String sequence;
+	private boolean started;
+	
 	public GamesAdapter(Context context, JSONArray games, boolean isCurrUserGames) {
 		super();
 		this.context = context;
@@ -67,6 +71,8 @@ public class GamesAdapter extends BaseAdapter {
 	
 	private class ViewHolder {
 		String gameId;
+		String sequence;
+		boolean started;
 		TextView gameName;
 		TextView gameDescription;
 		TextView numOfPlayers;
@@ -95,6 +101,8 @@ public class GamesAdapter extends BaseAdapter {
 			holder.gameDescription.setText(currentGame.getString("description"));
 			holder.numOfPlayers.setText(currentGame.getString("numOfPlayers"));
 			holder.gameId = currentGame.getString("id");
+			holder.sequence = currentGame.getString("sequence");
+			holder.started = currentGame.getBoolean("started");
 			if (isCurrUserGames) {
 				holder.joinOrEnter.setText("Enter");
 			}
@@ -110,27 +118,49 @@ public class GamesAdapter extends BaseAdapter {
 		
 		@Override
 		public void onClick(View view) {
+			ViewHolder vh = ((ViewHolder) ((View) view.getParent()).getTag()); 
+			gameId = vh.gameId;
+			sequence = vh.sequence;
+			started = vh.started;
+			
 			if (isCurrUserGames) { // in case user want's to enter to one of his games.
-				context.startActivity(new Intent(context, GameActivity.class));
+				Intent intent = new Intent(context, GameActivity.class);
+				intent.putExtra("gameId", gameId);
+				intent.putExtra("sequence", sequence);
+				context.startActivity(intent);
 			} else { // in case user want's to join to one of the open games list.
-				String gameId = ((ViewHolder) ((View) view.getParent()).getTag()).gameId;
 				new Client()
 					.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
 					.setHeader(HTTP.CONTENT_TYPE, context.getString(R.string.application_json))
-					.send(onResponseListener);
+					.send(onPlayerAddedListener);
 			}
 		}
 	};
 	
-	private OnResponseListener onResponseListener = new OnResponseListener() {
+	private OnResponseListener onPlayerAddedListener = new OnResponseListener() {
 		
 		@Override
 		public void onResponseReceived(Response response) {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
-				Log.e(TAG, response.getBody());
-				return;
+				
+				new Client()
+					.post(Urls.startGame(context, gameId))
+					.setHeader(HTTP.CONTENT_TYPE, context.getString(R.string.application_json))
+					.send(onGameStartedListener);
 			}
-			context.startActivity(new Intent(context, GameActivity.class));
+		}
+	};
+	
+	private OnResponseListener onGameStartedListener = new OnResponseListener() {
+		
+		@Override
+		public void onResponseReceived(Response response) {
+			if (response.getStatusCode() != HttpStatus.SC_OK) {
+				Intent intent = new Intent(context, GameActivity.class);
+				intent.putExtra("gameId", gameId);
+				intent.putExtra("sequence", sequence);
+				context.startActivity(intent);
+			}
 		}
 	};
 }
