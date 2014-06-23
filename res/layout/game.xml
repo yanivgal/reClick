@@ -3,6 +3,7 @@
     style="@style/main_container" >
 
     <include layout="@layout/footer" />
+    <include layout="@layout/settings"/>
 
     <LinearLayout
         android:id="@+id/game_main_linear_layout"
@@ -47,16 +48,6 @@
                 android:contentDescription="@null" />
             
         </LinearLayout>
-
-        <!-- Temporrary -->
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="signOut"
-            android:text="Sign Out" />
-        <!-- Temporrary -->
 
     </LinearLayout>
 
