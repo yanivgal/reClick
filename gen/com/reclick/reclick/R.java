@@ -327,6 +327,10 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f010010;
     }
     public static final class color {
+        public static final int black=0x7f050017;
+        public static final int black_half_opacity=0x7f050018;
+        public static final int blue=0x7f050023;
+        public static final int bright_gray=0x7f05001c;
         public static final int common_action_bar_splitter=0x7f050009;
         /**  Sign-in Button Colors 
          */
@@ -339,8 +343,16 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f050006;
         public static final int common_signin_btn_light_text_focused=0x7f050007;
         public static final int common_signin_btn_light_text_pressed=0x7f050005;
-        public static final int common_signin_btn_text_dark=0x7f050017;
-        public static final int common_signin_btn_text_light=0x7f050018;
+        public static final int common_signin_btn_text_dark=0x7f050024;
+        public static final int common_signin_btn_text_light=0x7f050025;
+        public static final int cyan=0x7f05001d;
+        public static final int cyan_faded=0x7f05001f;
+        public static final int cyan_ocean=0x7f05001e;
+        public static final int dark_blue=0x7f050020;
+        public static final int gray=0x7f05001a;
+        public static final int green=0x7f05001b;
+        public static final int red_warn=0x7f050021;
+        public static final int transparent=0x7f050022;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f05000f;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -359,8 +371,9 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f050011;
         public static final int wallet_holo_blue_light=0x7f050015;
         public static final int wallet_link_text_light=0x7f050016;
-        public static final int wallet_primary_text_holo_light=0x7f050019;
-        public static final int wallet_secondary_text_holo_dark=0x7f05001a;
+        public static final int wallet_primary_text_holo_light=0x7f050026;
+        public static final int wallet_secondary_text_holo_dark=0x7f050027;
+        public static final int white=0x7f050019;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -429,7 +442,7 @@ containing a value of this type.
         public static final int yellow_button_image=0x7f020035;
     }
     public static final class id {
-        public static final int action_settings=0x7f060034;
+        public static final int action_settings=0x7f060033;
         public static final int book_now=0x7f060010;
         public static final int button1=0x7f06001b;
         public static final int buyButton=0x7f06000a;
@@ -460,17 +473,16 @@ containing a value of this type.
         public static final int login_activity_username_input=0x7f06001f;
         public static final int login_activity_username_label=0x7f06001e;
         public static final int logo=0x7f06001d;
-        public static final int main_activity_create_new_game_button=0x7f06002a;
-        public static final int main_activity_current_user_games_list=0x7f06002e;
-        public static final int main_activity_current_user_games_textView=0x7f06002d;
-        public static final int main_activity_games_row_game_description=0x7f060032;
-        public static final int main_activity_games_row_game_name=0x7f060030;
-        public static final int main_activity_games_row_game_num_of_players=0x7f060031;
-        public static final int main_activity_join_or_enter_game_button=0x7f060033;
-        public static final int main_activity_open_games_list=0x7f06002c;
-        public static final int main_activity_open_games_textView=0x7f06002b;
-        public static final int main_activity_settings_button=0x7f060029;
-        public static final int main_games_lists_row=0x7f06002f;
+        public static final int main_activity_create_new_game_button=0x7f060029;
+        public static final int main_activity_current_user_games_list=0x7f06002d;
+        public static final int main_activity_current_user_games_textView=0x7f06002c;
+        public static final int main_activity_games_row_game_description=0x7f060031;
+        public static final int main_activity_games_row_game_name=0x7f06002f;
+        public static final int main_activity_games_row_game_num_of_players=0x7f060030;
+        public static final int main_activity_join_or_enter_game_button=0x7f060032;
+        public static final int main_activity_open_games_list=0x7f06002b;
+        public static final int main_activity_open_games_textView=0x7f06002a;
+        public static final int main_games_lists_row=0x7f06002e;
         public static final int match_parent=0x7f06000c;
         public static final int monochrome=0x7f060013;
         public static final int none=0x7f060000;
@@ -492,7 +504,8 @@ containing a value of this type.
         public static final int login=0x7f030002;
         public static final int main=0x7f030003;
         public static final int main_games_row=0x7f030004;
-        public static final int splash=0x7f030005;
+        public static final int settings=0x7f030005;
+        public static final int splash=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -689,6 +702,8 @@ containing a value of this type.
         public static final int main_content=0x7f080014;
         public static final int main_content_splash=0x7f080015;
         public static final int main_footer=0x7f080006;
+        public static final int settings_button=0x7f080021;
+        public static final int settings_container=0x7f080020;
         public static final int text_shadow=0x7f080012;
     }
     public static final class styleable {

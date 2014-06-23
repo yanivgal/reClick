@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#ff000000</color>
+    <color name="black_half_opacity">#80000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="gray">#ff444444</color>
+    <color name="green">#ff00ff00</color>
+    <color name="bright_gray">#ffd7d7d7</color>
+    <color name="cyan">#ff00ffff</color>
+    <color name="cyan_ocean">#ff43b3e9</color>
+    <color name="cyan_faded"> #ff72c9f7</color>
+    <color name="dark_blue">#ff232136</color>
+    <color name="red_warn">#ffe32929</color>
+    <color name="transparent">#00000000</color>
+    <color name="blue">#00f</color>
+
+</resources>
