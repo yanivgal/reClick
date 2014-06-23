@@ -1,21 +1,38 @@
 package com.reclick.reclick;
 
+import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 public class GameActivity extends Activity {
 	
-//	private final String TAG = this.getClass().getSimpleName();
+	private final String TAG = this.getClass().getSimpleName();
+	
+	String gameId;
+	String sequence;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			gameId = extras.getString("gameId");
+			sequence = extras.getString("sequence");
+		}
+		if (gameId == null || sequence == null) {
+			// TODO decide how to handle this
+			App.showToast(this, "Can't instantiate game");
+			finish();
+			return;
+		}
 	}
 	
 	public void blueButtonClicked(View view) {

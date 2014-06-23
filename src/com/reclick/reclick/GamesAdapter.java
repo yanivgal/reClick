@@ -112,7 +112,6 @@ public class GamesAdapter extends BaseAdapter {
 		public void onClick(View view) {
 			if (isCurrUserGames) { // in case user want's to enter to one of his games.
 				context.startActivity(new Intent(context, GameActivity.class));
-				((Activity) context).finish();
 			} else { // in case user want's to join to one of the open games list.
 				String gameId = ((ViewHolder) ((View) view.getParent()).getTag()).gameId;
 				new Client()
@@ -132,7 +131,6 @@ public class GamesAdapter extends BaseAdapter {
 				return;
 			}
 			context.startActivity(new Intent(context, GameActivity.class));
-			((Activity) context).finish();
 		}
 	};
 }
