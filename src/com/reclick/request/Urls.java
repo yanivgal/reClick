@@ -32,6 +32,16 @@ public class Urls {
 						);
 	}
 	
+	public static String startGame(Context context, String gameId) {
+		return buildUrl(context,
+						context.getString(R.string.games_collection)
+							+ File.separator
+							+ gameId
+							+ File.separator
+							+ context.getString(R.string.method_start)
+						);
+	}
+	
 	private static String buildUrl(Context context, String pathSuffix) {
 		return context.getString(R.string.scheme)
 				+ File.pathSeparator

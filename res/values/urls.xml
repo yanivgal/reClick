@@ -9,6 +9,7 @@
     
     <string name="method_login">login</string>
     <string name="method_sign_up">sign-up</string>
+    <string name="method_start">start</string>
     
     <string name="games_collection">games</string>
     <string name="players_collection">players</string>
