@@ -1,21 +1,25 @@
 package com.reclick.reclick;
 
-import com.reclick.framework.App;
-import com.reclick.framework.Prefs;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import unite.Client;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
+import com.reclick.framework.App;
+import com.reclick.framework.Prefs;
+import com.reclick.request.Urls;
 
 public class GameActivity extends Activity {
 	
-	private final String TAG = this.getClass().getSimpleName();
-	
 	String gameId;
-	String sequence;
+	String sequenceString;
+	
+	ArrayList<String> sequence;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,9 @@ public class GameActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			gameId = extras.getString("gameId");
-			sequence = extras.getString("sequence");
+			sequenceString = extras.getString("sequence");
 		}
-		if (gameId == null || sequence == null) {
+		if (gameId == null || sequenceString == null) {
 			// TODO decide how to handle this
 			App.showToast(this, "Can't instantiate game");
 			finish();
@@ -34,22 +38,68 @@ public class GameActivity extends Activity {
 		}
 		
 		setContentView(R.layout.game);
+		
+		sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
 	}
 	
 	public void blueButtonClicked(View view) {
-		Toast.makeText(this, "Blue button has been pressed", Toast.LENGTH_SHORT).show();
+		handleStep(view);
 	}
 	
 	public void greenButtonClicked(View view) {
-		Toast.makeText(this, "Green button has been pressed", Toast.LENGTH_SHORT).show();
+		handleStep(view);
 	}
 	
 	public void redButtonClicked(View view) {
-		Toast.makeText(this, "Red button has been pressed", Toast.LENGTH_SHORT).show();
+		handleStep(view);
 	}
 	
 	public void yellowButtonClicked(View view) {
-		Toast.makeText(this, "Yellow button has been pressed", Toast.LENGTH_SHORT).show();
+		handleStep(view);
+	}
+	
+	private void handleStep(View view) {
+		int tileNum = Integer.parseInt((String) view.getTag());
+
+		if (sequence.isEmpty()) {
+			appendNewStep(tileNum);
+			sendPlayerMove();
+			finish();
+			return;
+		}
+		
+		if (!correctStep(tileNum)) {
+			playerFailed();
+			finish();
+			return;
+		}
+	}
+	
+	private void appendNewStep(int tileNum) {
+		sequenceString += "," + tileNum;
+	}
+	
+	private void sendPlayerMove() {
+		String s = new Client()
+			.post(Urls.sendPlayerMove(this, gameId, Prefs.getUsername(this)))
+				.setBody("{\"sequence\":\"" + sequenceString + "\"}")
+				.send()
+				.getBody();
+		
+		App.showToast(this, sequenceString);
+	}
+	
+	private void playerFailed() {
+		new Client()
+			.delete(Urls.deletePlayerFromGame(this, gameId, Prefs.getUsername(this)))
+			.send();
+		
+		App.showToast(this, "Fail");
+	}
+	
+	private boolean correctStep(int tileNum) {
+		int sequenceStep = Integer.parseInt(sequence.remove(0));
+		return tileNum == sequenceStep;
 	}
 	
 	public void signOut(View v) {

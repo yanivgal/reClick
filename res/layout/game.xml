@@ -16,13 +16,16 @@
                 android:id="@+id/game_activity_blue_button"
                 style="@style/game_activity_game_image_button.blue"
                 android:onClick="blueButtonClicked"
+                android:tag="1"
                 android:contentDescription="@null" />
 
             <ImageButton
                 android:id="@+id/game_activity_green_button"
                 style="@style/game_activity_game_image_button.green"
                 android:onClick="greenButtonClicked"
+                android:tag="2"
                 android:contentDescription="@null" />
+            
         </LinearLayout>
 
         <LinearLayout
@@ -33,13 +36,16 @@
                 android:id="@+id/game_activity_red_button"
                 style="@style/game_activity_game_image_button.red"
                 android:onClick="redButtonClicked"
+                android:tag="3"
                 android:contentDescription="@null" />
 
             <ImageButton
                 android:id="@+id/game_activity_yellow_button"
                 style="@style/game_activity_game_image_button.yellow"
                 android:onClick="yellowButtonClicked"
+                android:tag="4"
                 android:contentDescription="@null" />
+            
         </LinearLayout>
 
         <!-- Temporrary -->

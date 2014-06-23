@@ -61,4 +61,8 @@ public class App {
         imm.hideSoftInputFromWindow(
         		activity.getCurrentFocus().getWindowToken(), 0);
 	}
+	
+	public static String getTag(Context context) {
+		return context.getClass().getSimpleName();
+	}
 }
