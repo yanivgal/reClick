@@ -3,7 +3,9 @@
     style="@style/settings_container" >
     
 	<ImageButton
+	    	android:id="@+id/settingsButton"
             android:contentDescription="@null"
-            style="@style/settings_button" />
+            style="@style/settings_button"
+            android:onClick="settingsButtonClicked" />
 	
 </LinearLayout>

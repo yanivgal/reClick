@@ -3,9 +3,11 @@
     style="@style/main_container" >
 
     <include layout="@layout/footer" />
-    <include layout="@layout/settings"/>
+
+    <include layout="@layout/settings" />
 
     <LinearLayout
+        android:id="@+id/main_activity_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -56,19 +58,87 @@
             android:layout_marginRight="20dp" >
         </ListView>
     </LinearLayout>
+    
+    <!-- Popup -->
 
     <LinearLayout
+        android:id="@+id/main_activity_create_game_popup_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_half_opacity"
         android:visibility="invisible" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:background="@color/black" >
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@color/black_half_opacity"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="@string/main_activity_create_game_popup_menu_game_details"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/main_activity_create_game_popup_menu_game_name_editText_hint"
+                    android:inputType="text" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="@string/main_activity_create_game_popup_menu_game_description_editText_hint"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_activity_create_game_popup_menu_invite_friends"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/main_activity_create_game_popup_menu_invite_friends_editText_hint"
+                    android:inputType="text" />
+
+                <Button
+                    android:id="@+id/main_activity_create_game_popup_menu_invite_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="invite"
+                    android:text="@string/main_activity_create_game_popup_menu_invite_button_text" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/main_activity_create_game_popup_menu_create_game_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="createGame"
+                android:text="@string/main_activity_create_game_popup_menu_create_game_button_text" />
         </LinearLayout>
     </LinearLayout>
 
