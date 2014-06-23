@@ -32,6 +32,32 @@ public class Urls {
 						);
 	}
 	
+	public static String deletePlayerFromGame(Context context, String gameId, String username) {
+		return buildUrl(context,
+						context.getString(R.string.games_collection)
+							+ File.separator
+							+ gameId
+							+ File.separator
+							+ context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
+						);
+	}
+	
+	public static String sendPlayerMove(Context context, String gameId, String username) {
+		return buildUrl(context,
+						context.getString(R.string.games_collection)
+							+ File.separator
+							+ gameId
+							+ File.separator
+							+ context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
+							+ File.separator
+							+ context.getString(R.string.method_sequence) 
+						);
+	}
+	
 	public static String startGame(Context context, String gameId) {
 		return buildUrl(context,
 						context.getString(R.string.games_collection)
