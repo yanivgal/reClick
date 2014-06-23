@@ -3,31 +3,28 @@
     style="@style/main_container" >
 
     <include layout="@layout/footer" />
-
-    <ImageButton
-        android:id="@+id/main_activity_settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="settingsButtonClicked"
-        android:src="@drawable/settings_button"
-        android:contentDescription="@null"
-        android:background="@null"
-        android:text="@string/main_activity_settings_button_text" />
+    <include layout="@layout/settings"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/main_activity_create_new_game_button"
-            style="@style/login_activity_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:onClick="createGameButtonClicked"
-            android:text="@string/main_activity_create_new_game_button_text" />
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/main_activity_create_new_game_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:onClick="createGameButtonClicked"
+                android:text="@string/main_activity_create_new_game_button_text" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/main_activity_open_games_textView"
@@ -60,10 +57,19 @@
         </ListView>
     </LinearLayout>
 
-    <!-- <LinearLayout -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="match_parent" -->
-    <!-- android:visibility="invisible" > -->
-    <!-- </LinearLayout> -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_half_opacity"
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@color/black" >
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>
