@@ -2,24 +2,41 @@ package com.reclick.reclick;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import org.apache.http.protocol.HTTP;
 
 import unite.Client;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
 import com.reclick.request.Urls;
 
+@SuppressLint("HandlerLeak")
 public class GameActivity extends Activity {
 	
 	String gameId;
 	String sequenceString;
 	
 	ArrayList<String> sequence;
+	
+	ImageButton blueTile;
+	ImageButton greenTile;
+	ImageButton redTile;
+	ImageButton yellowTile;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +57,13 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.game);
 		
 		sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
+		
+//		blueTile = (ImageButton) findViewById(R.id.game_activity_blue_button);
+//		greenTile = (ImageButton) findViewById(R.id.game_activity_green_button);
+//		redTile = (ImageButton) findViewById(R.id.game_activity_red_button);
+//		yellowTile = (ImageButton) findViewById(R.id.game_activity_yellow_button);
+
+		animateLastSequence();	
 	}
 	
 	public void blueButtonClicked(View view) {
@@ -55,6 +79,10 @@ public class GameActivity extends Activity {
 	}
 	
 	public void yellowButtonClicked(View view) {
+		handleStep(view);
+	}
+	
+	public void tileClicked(View view) {
 		handleStep(view);
 	}
 	
@@ -80,11 +108,11 @@ public class GameActivity extends Activity {
 	}
 	
 	private void sendPlayerMove() {
-		String s = new Client()
+		new Client()
 			.post(Urls.sendPlayerMove(this, gameId, Prefs.getUsername(this)))
-				.setBody("{\"sequence\":\"" + sequenceString + "\"}")
-				.send()
-				.getBody();
+			.setHeader(HTTP.CONTENT_TYPE, this.getString(R.string.application_json))
+			.addParam("sequence", sequenceString)
+			.send();
 		
 		App.showToast(this, sequenceString);
 	}
@@ -107,5 +135,64 @@ public class GameActivity extends Activity {
 		Intent intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
 		startActivity(intent);
 		finish();
+	}
+	
+	
+
+	private void animateLastSequence() {
+		final Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Executor executor = Executors.newSingleThreadExecutor();
+				for (String tileNum : sequence) {
+					executor.execute(new TileAnimationRunnable(Integer
+							.parseInt(tileNum)));
+				}
+			}
+		}, 2000);
+	}
+	
+	private class TileAnimationRunnable implements Runnable {
+		
+		private int tileNum;
+		
+		public TileAnimationRunnable(int tileNum) {
+			this.tileNum = tileNum;
+		}
+		
+		public void run() {
+			pressTileHandler.sendEmptyMessage(tileNum);
+			
+			try {
+				Thread.sleep(350);
+			} catch (InterruptedException e) { }
+			
+			unpressTileHandler.sendEmptyMessage(tileNum);
+			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) { }
+		}
+	}
+	
+	private Handler unpressTileHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			getTile(msg.what).setPressed(false);
+		};
+	};
+	
+	private Handler pressTileHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			getTile(msg.what).setPressed(true);
+		};
+	};
+	
+	@SuppressLint("HandlerLeak")
+	private ImageButton getTile(int tileNum) {
+		int id = getResources().getIdentifier("tile_" + tileNum, "id", getPackageName());
+		return (ImageButton) findViewById(id);
 	}
 }
