@@ -10,70 +10,51 @@
         android:id="@+id/main_activity_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/main_activity_create_new_game_button"
-                style="@style/login_activity_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="createGameButtonClicked"
-                android:text="@string/main_activity_create_new_game_button_text" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/main_activity_create_new_game_button"
+            style="@style/login_activity_button"
+            android:onClick="createGameButtonClicked"
+            android:text="@string/main_activity_create_new_game_button_text" />
 
         <TextView
             android:id="@+id/main_activity_open_games_textView"
             style="@style/login_activity_label.red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/main_activity_open_games_textview_text"
-            android:textSize="20sp" />
+            android:text="@string/main_activity_open_games_textview_text" />
 
         <ListView
             android:id="@+id/main_activity_open_games_list"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" >
+            android:layout_height="140dp"
+            android:layout_marginBottom="20dp" >
         </ListView>
 
         <TextView
             android:id="@+id/main_activity_current_user_games_textView"
             style="@style/login_activity_label.blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/main_activity_current_user_games_textview_text"
-            android:textSize="20sp" />
+            android:text="@string/main_activity_current_user_games_textview_text" />
 
         <ListView
             android:id="@+id/main_activity_current_user_games_list"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" >
+            android:layout_height="140dp" >
         </ListView>
     </LinearLayout>
 
-    <!-- Popup -->
+    <!-- create game pop-up menu -->
 
     <LinearLayout
         android:id="@+id/main_activity_create_game_popup_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
         android:background="@color/black_half_opacity"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_margin="20dp"
         android:visibility="invisible" >
 
         <TextView

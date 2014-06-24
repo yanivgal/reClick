@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 		popUpLayout.setVisibility(View.VISIBLE);
 	}
 	
-	public void createGame(View view) { // TODO: Check This method!!!!!
+	public void createGame(View view) {
 		Request request = (new Client()).post(Urls.createGame(this));
 		request.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json));
 		request.addParam("username", Prefs.getUsername(this));
@@ -71,8 +71,19 @@ public class MainActivity extends Activity {
 		if (gameDescription != null && gameDescription.getText().toString() != null && !gameDescription.getText().toString().isEmpty()) {
 			request.addParam("gameDescription", gameDescription.getText().toString());
 		}
-		request.send();
+		request.send(onCreateGameResponseListener);
 	}
+	
+	private OnResponseListener onCreateGameResponseListener = new OnResponseListener() {
+		public void onResponseReceived(Response response) {
+			if (response.getStatusCode() != HttpStatus.SC_OK) {
+				Log.e(TAG, response.getErrorMsg());
+			}
+			Log.e(TAG, response.getBody());
+			finish();
+			startActivity(getIntent());
+		}
+	};
 	
 	@Override
 	public void onBackPressed() {
