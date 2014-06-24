@@ -8,7 +8,6 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.reclick.framework.Prefs;
-import com.reclick.gcm.Gcm;
 
 public class SplashActivity extends Activity {
 	

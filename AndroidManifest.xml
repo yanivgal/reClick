@@ -56,16 +56,15 @@
             android:value="@integer/google_play_services_version" />
 
         <receiver
-            android:name="com.reclick.gcm.GcmBroadcastReceiver"
+            android:name="com.reclick.reclick.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
                 <category android:name="com.reclick.reclick" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.reclick.gcm.GcmIntentService" />
+        <service android:name="com.reclick.reclick.GcmIntentService" />
     </application>
 
 </manifest>

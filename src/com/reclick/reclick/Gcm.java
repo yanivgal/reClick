@@ -1,4 +1,4 @@
-package com.reclick.gcm;
+package com.reclick.reclick;
 
 import java.io.IOException;
 
@@ -10,7 +10,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
 import com.reclick.reclick.R;
-import com.reclick.reclick.SplashActivity;
 
 public class Gcm {
 	
