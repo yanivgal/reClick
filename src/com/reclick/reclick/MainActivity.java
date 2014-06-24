@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.reclick.framework.App;
@@ -23,11 +25,18 @@ import com.reclick.request.Urls;
 public class MainActivity extends Activity {
 	
 	private final String TAG = this.getClass().getSimpleName();
+	private LinearLayout mainLayout;
+	private LinearLayout popUpLayout;
+	private ImageButton settingsButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		mainLayout = (LinearLayout) findViewById(R.id.main_activity_main_layout);
+		popUpLayout = (LinearLayout) findViewById(R.id.main_activity_create_game_popup_menu);
+		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 		
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
@@ -35,14 +44,35 @@ public class MainActivity extends Activity {
 	
 	public void settingsButtonClicked(View view) {
 		Prefs.removePref(this, Prefs.PROPERTY_USERNAME);
-		Intent intent = new Intent(this, com.reclick.reclick.LoginActivity.class);
+		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
 		finish();
 	}
 	
 	public void createGameButtonClicked(View view) {
-//		((LinearLayout) findViewById(R.id.main_create_new_game_popup_window)).setVisibility(View.VISIBLE);
-		App.showToast(this, "Create button has been pressed");
+		mainLayout.setVisibility(View.INVISIBLE);
+		settingsButton.setVisibility(View.INVISIBLE);
+		popUpLayout.setVisibility(View.VISIBLE);
+	}
+	
+	public void createGame(View view) {
+//		new Client()
+//			.
+	}
+	
+	public void invite(View view) {
+		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if (popUpLayout.getVisibility() == View.VISIBLE) {
+			popUpLayout.setVisibility(View.INVISIBLE);
+			mainLayout.setVisibility(View.VISIBLE);
+			settingsButton.setVisibility(View.VISIBLE);
+		} else {
+			super.onBackPressed();
+		}
 	}
 	
 	private void sendGetOpenGamesListRequest() {
