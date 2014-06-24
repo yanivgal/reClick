@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_activity_container"
     style="@style/main_container" >
 
     <include layout="@layout/footer" />
 
     <include layout="@layout/settings" />
 
+    <TextView
+        android:id="@+id/main_activity_hello_user_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="14dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:text="@string/main_activity_hello_user_default_textView_text" />
+
     <LinearLayout
         android:id="@+id/main_activity_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:padding="20dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="20dp" >
 
         <Button
             android:id="@+id/main_activity_create_new_game_button"
             style="@style/login_activity_button"
-            android:onClick="createGameButtonClicked"
+            android:onClick="createANewGameButtonClicked"
             android:text="@string/main_activity_create_new_game_button_text" />
 
         <TextView
@@ -44,62 +56,39 @@
         </ListView>
     </LinearLayout>
 
-    <!-- create game pop-up menu -->
+    <!-- game pop-up menu -->
 
     <LinearLayout
         android:id="@+id/main_activity_create_game_popup_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/black_half_opacity"
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_margin="20dp"
+        android:background="@color/black_half_opacity"
+        android:orientation="vertical"
+        android:padding="20dp"
         android:visibility="invisible" >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10sp"
-            android:text="@string/main_activity_create_game_popup_menu_game_details"
-            android:textSize="20sp" />
+            style="@style/login_activity_label.red"
+            android:text="@string/main_activity_create_game_popup_menu_game_name" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp" >
-
-            <EditText
-                android:id="@+id/main_activity_create_game_popup_menu_game_name_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="@string/main_activity_create_game_popup_menu_game_name_editText_hint"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/main_activity_create_game_popup_menu_game_description_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint="@string/main_activity_create_game_popup_menu_game_description_editText_hint"
-                android:inputType="text" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/main_activity_create_game_popup_menu_game_name_editText"
+            style="@style/login_activity_input" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_activity_create_game_popup_menu_invite_friends"
-            android:textSize="20sp" />
+            style="@style/login_activity_label.blue"
+            android:text="@string/main_activity_create_game_popup_menu_game_description" />
+
+        <EditText
+            android:id="@+id/main_activity_create_game_popup_menu_game_description_editText"
+            style="@style/login_activity_input" />
 
         <Button
             android:id="@+id/main_activity_create_game_popup_menu_create_game_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="createGame"
+            style="@style/login_activity_button"
+            android:onClick="createGameButtonClicked"
             android:text="@string/main_activity_create_game_popup_menu_create_game_button_text" />
     </LinearLayout>
 
