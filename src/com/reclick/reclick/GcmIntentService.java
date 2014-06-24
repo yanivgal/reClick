@@ -40,11 +40,11 @@ public class GcmIntentService extends IntentService {
              */
             if (messageType.equals(
             		GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR)) {
-                sendNotification("Send error: " + extras.toString());
+                sendNotification("Send error: " + extras.toString(), "", "");
             } else if (messageType.equals(
             		GoogleCloudMessaging.MESSAGE_TYPE_DELETED)) {
                 sendNotification("Deleted messages on server: " +
-                        extras.toString());
+                        extras.toString(), "", "");
             // If it's a regular GCM message, do some work.
             } else if (messageType.equals(
             		GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE)) {
@@ -52,8 +52,10 @@ public class GcmIntentService extends IntentService {
             	// TODO do some work here
             	
                 // Post notification of received message.
-            	String s = extras.getString("message");
-                sendNotification(s);
+            	String message = extras.getString("message");
+            	String gameId = extras.getString("gameId");
+            	String sequence = extras.getString("sequence");
+                sendNotification(message, gameId, sequence);
                 
                 Log.i("GcmIntentService", "Received: " + extras.toString());
             }
@@ -67,12 +69,15 @@ public class GcmIntentService extends IntentService {
 	// Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with
     // a GCM message.
-    private void sendNotification(String msg) {
+    private void sendNotification(String msg, String gameId, String sequence) {
     	mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
     	
-    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, SplashActivity.class), 0);
+    	Intent intent = new Intent(this, GameActivity.class);
+    	intent.putExtra("gameId", gameId);
+    	intent.putExtra("sequence", sequence);
+    	
+    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
     	
     	NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
