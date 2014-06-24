@@ -104,6 +104,8 @@ public class MainActivity extends Activity {
 			mainLayout.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
 			helloUser.setVisibility(View.VISIBLE);
+			finish();
+			startActivity(getIntent());
 		} else {
 			super.onBackPressed();
 		}
