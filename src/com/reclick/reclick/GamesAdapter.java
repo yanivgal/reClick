@@ -143,8 +143,7 @@ public class GamesAdapter extends BaseAdapter {
 		
 		@Override
 		public void onResponseReceived(Response response) {
-			if (response.getStatusCode() != HttpStatus.SC_OK) {
-				
+			if (response.getStatusCode() == HttpStatus.SC_OK) {
 				new Client()
 					.post(Urls.startGame(context, gameId))
 					.setHeader(HTTP.CONTENT_TYPE, context.getString(R.string.application_json))
@@ -157,7 +156,7 @@ public class GamesAdapter extends BaseAdapter {
 		
 		@Override
 		public void onResponseReceived(Response response) {
-			if (response.getStatusCode() != HttpStatus.SC_OK) {
+			if (response.getStatusCode() == HttpStatus.SC_OK) {
 				Intent intent = new Intent(context, GameActivity.class);
 				intent.putExtra("gameId", gameId);
 				intent.putExtra("sequence", sequence);

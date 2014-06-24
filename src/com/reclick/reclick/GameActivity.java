@@ -38,33 +38,21 @@ public class GameActivity extends Activity {
 			gameId = extras.getString("gameId");
 			sequenceString = extras.getString("sequence");
 		}
-		if (gameId == null || sequenceString == null) {
-			App.showToast(this, "Can't instantiate game");
-			finish();
-			return;
-		}
 		
 		setContentView(R.layout.game);
 		
-		sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
+		if (sequenceString == null || sequenceString.equals("null")) {
+			sequenceString = "";
+			sequence = new ArrayList<String>();
+		} else {
+			sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
+		}
 		
-		animateLastSequence();	
-	}
-	
-	public void blueButtonClicked(View view) {
-		handleStep(view);
-	}
-	
-	public void greenButtonClicked(View view) {
-		handleStep(view);
-	}
-	
-	public void redButtonClicked(View view) {
-		handleStep(view);
-	}
-	
-	public void yellowButtonClicked(View view) {
-		handleStep(view);
+		int s = sequence.size();
+			
+		if (!sequence.isEmpty()) {
+			animateLastSequence();
+		}
 	}
 	
 	public void tileClicked(View view) {
@@ -91,7 +79,10 @@ public class GameActivity extends Activity {
 	}
 	
 	private void appendNewStep(int tileNum) {
-		sequenceString += "," + tileNum;
+		if (!sequenceString.isEmpty()) {
+			sequenceString += ",";
+		}
+		sequenceString += tileNum;
 	}
 	
 	private void sendPlayerMove() {
