@@ -52,7 +52,7 @@ public class GcmIntentService extends IntentService {
             	// TODO do some work here
             	
                 // Post notification of received message.
-            	String s = extras.getString("opponent_name") + " succesfuly played his move.\nNow it's your turn...";
+            	String s = extras.getString("message");
                 sendNotification(s);
                 
                 Log.i("GcmIntentService", "Received: " + extras.toString());
