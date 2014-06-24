@@ -76,8 +76,9 @@ public class GcmIntentService extends IntentService {
     	Intent intent = new Intent(this, GameActivity.class);
     	intent.putExtra("gameId", gameId);
     	intent.putExtra("sequence", sequence);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	
-    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     	
     	NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
