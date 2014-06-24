@@ -52,12 +52,16 @@ public class GcmIntentService extends IntentService {
             	// TODO do some work here
             	
                 // Post notification of received message.
-            	String message = extras.getString("message");
-            	String gameId = extras.getString("gameId");
-            	String sequence = extras.getString("sequence");
-                sendNotification(message, gameId, sequence);
-                
-                Log.i("GcmIntentService", "Received: " + extras.toString());
+            	String notificationType = extras.getString("type");
+            	if (notificationType.equals("move")) {
+            		String message = extras.getString("message");
+                	String gameId = extras.getString("gameId");
+                	String sequence = extras.getString("sequence");
+                	sendNotification(message, gameId, sequence);
+            	} else if (notificationType.equals("fail")) {
+            		String message = extras.getString("message");
+            		sendPlayerFailedNotification(message);
+            	}
             }
         }
         
@@ -76,6 +80,28 @@ public class GcmIntentService extends IntentService {
     	Intent intent = new Intent(this, GameActivity.class);
     	intent.putExtra("gameId", gameId);
     	intent.putExtra("sequence", sequence);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	
+    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    	
+    	NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentTitle("reClick")
+        .setStyle(new NotificationCompat.BigTextStyle()
+        .bigText(msg))
+        .setContentText(msg)
+        .setAutoCancel(true);
+    	
+    	mBuilder.setContentIntent(contentIntent);
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+    
+    private void sendPlayerFailedNotification(String msg) {
+    	mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+    	
+    	Intent intent = new Intent(this, MainActivity.class);
     	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	
     	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
