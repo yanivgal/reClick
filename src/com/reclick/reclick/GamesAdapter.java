@@ -12,7 +12,6 @@ import unite.Response;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -75,7 +74,6 @@ public class GamesAdapter extends BaseAdapter {
 		boolean started;
 		TextView gameName;
 		TextView gameDescription;
-		TextView numOfPlayers;
 		Button joinOrEnter;
 	}
 
@@ -88,7 +86,6 @@ public class GamesAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.gameName = (TextView) convertView.findViewById(R.id.main_activity_games_row_game_name);
 			holder.gameDescription = (TextView) convertView.findViewById(R.id.main_activity_games_row_game_description);
-			holder.numOfPlayers = (TextView) convertView.findViewById(R.id.main_activity_games_row_game_num_of_players);
 			holder.joinOrEnter = (Button) convertView.findViewById(R.id.main_activity_join_or_enter_game_button);
 			convertView.setTag(holder);
 		} else {
@@ -99,7 +96,6 @@ public class GamesAdapter extends BaseAdapter {
 			JSONObject currentGame = (JSONObject)games.get(position);
 			holder.gameName.setText(currentGame.getString("name"));
 			holder.gameDescription.setText(currentGame.getString("description"));
-			holder.numOfPlayers.setText(currentGame.getString("numOfPlayers"));
 			holder.gameId = currentGame.getString("id");
 			holder.sequence = currentGame.getString("sequence");
 			holder.started = currentGame.getBoolean("started");
