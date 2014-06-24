@@ -14,11 +14,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
@@ -30,6 +34,7 @@ public class MainActivity extends Activity {
 	private LinearLayout mainLayout;
 	private LinearLayout popUpLayout;
 	private ImageButton settingsButton;
+	private TextView helloUser;
 	private EditText gameName;
 	private EditText gameDescription;
 	
@@ -43,6 +48,12 @@ public class MainActivity extends Activity {
 		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 		gameName = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_name_editText);
 		gameDescription = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_description_editText);
+		helloUser = (TextView) findViewById(R.id.main_activity_hello_user_textView);
+		
+		helloUser.setText(getString(R.string.main_activity_hello_user_textView_prefix_text)
+						+ " " + Prefs.getNickname(this));
+		
+		((FrameLayout) findViewById(R.id.main_activity_container)).setOnTouchListener(onTouchListener);
 		
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
@@ -55,13 +66,14 @@ public class MainActivity extends Activity {
 		finish();
 	}
 	
-	public void createGameButtonClicked(View view) {
+	public void createANewGameButtonClicked(View view) {
 		mainLayout.setVisibility(View.INVISIBLE);
 		settingsButton.setVisibility(View.INVISIBLE);
+		helloUser.setVisibility(View.INVISIBLE);
 		popUpLayout.setVisibility(View.VISIBLE);
 	}
 	
-	public void createGame(View view) {
+	public void createGameButtonClicked(View view) {
 		Request request = (new Client()).post(Urls.createGame(this));
 		request.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json));
 		request.addParam("username", Prefs.getUsername(this));
@@ -91,6 +103,7 @@ public class MainActivity extends Activity {
 			popUpLayout.setVisibility(View.INVISIBLE);
 			mainLayout.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.VISIBLE);
+			helloUser.setVisibility(View.VISIBLE);
 		} else {
 			super.onBackPressed();
 		}
@@ -154,6 +167,15 @@ public class MainActivity extends Activity {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+		}
+	};
+	
+	private OnTouchListener onTouchListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			App.hideSoftKeyboard(MainActivity.this);
+			return true;
 		}
 	};
 }
