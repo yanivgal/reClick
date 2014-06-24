@@ -8,12 +8,14 @@ import org.json.JSONObject;
 
 import unite.Client;
 import unite.OnResponseListener;
+import unite.Request;
 import unite.Response;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,6 +30,8 @@ public class MainActivity extends Activity {
 	private LinearLayout mainLayout;
 	private LinearLayout popUpLayout;
 	private ImageButton settingsButton;
+	private EditText gameName;
+	private EditText gameDescription;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class MainActivity extends Activity {
 		mainLayout = (LinearLayout) findViewById(R.id.main_activity_main_layout);
 		popUpLayout = (LinearLayout) findViewById(R.id.main_activity_create_game_popup_menu);
 		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+		gameName = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_name_editText);
+		gameDescription = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_description_editText);
 		
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
@@ -55,13 +61,17 @@ public class MainActivity extends Activity {
 		popUpLayout.setVisibility(View.VISIBLE);
 	}
 	
-	public void createGame(View view) {
-//		new Client()
-//			.
-	}
-	
-	public void invite(View view) {
-		
+	public void createGame(View view) { // TODO: Check This method!!!!!
+		Request request = (new Client()).post(Urls.createGame(this));
+		request.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json));
+		request.addParam("username", Prefs.getUsername(this));
+		if (gameName != null && gameName.getText().toString() != null && !gameName.getText().toString().isEmpty()) {
+			request.addParam("gameName", gameName.getText().toString());
+		}
+		if (gameDescription != null && gameDescription.getText().toString() != null && !gameDescription.getText().toString().isEmpty()) {
+			request.addParam("gameDescription", gameDescription.getText().toString());
+		}
+		request.send();
 	}
 	
 	@Override

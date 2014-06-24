@@ -129,6 +129,7 @@ public class GamesAdapter extends BaseAdapter {
 				intent.putExtra("sequence", sequence);
 				intent.putExtra("started", started);
 				context.startActivity(intent);
+				((Activity) context).finish();
 			} else { // in case user want's to join to one of the open games list.
 				new Client()
 					.post(Urls.addPlayerToGame(context, gameId, Prefs.getUsername(context)))
@@ -162,6 +163,7 @@ public class GamesAdapter extends BaseAdapter {
 				intent.putExtra("sequence", sequence);
 				intent.putExtra("started", started);
 				context.startActivity(intent);
+				((Activity) context).finish();
 			}
 		}
 	};

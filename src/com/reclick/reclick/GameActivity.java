@@ -78,12 +78,14 @@ public class GameActivity extends Activity {
 			appendNewStep(tileNum);
 			sendPlayerMove();
 			finish();
+			startActivity(new Intent(this, MainActivity.class));
 			return;
 		}
 		
 		if (!correctStep(tileNum)) {
 			playerFailed();
 			finish();
+			startActivity(new Intent(this, MainActivity.class));
 			return;
 		}
 	}
@@ -150,6 +152,11 @@ public class GameActivity extends Activity {
 				Thread.sleep(100);
 			} catch (InterruptedException e) { }
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		startActivity(new Intent(this, MainActivity.class));
 	}
 	
 	private Handler unpressTileHandler = new Handler() {

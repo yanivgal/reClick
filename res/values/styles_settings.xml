@@ -9,6 +9,7 @@
     <style name="settings_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
         <item name="android:background">@null</item>
         <item name="android:src">@drawable/settings_button</item>
     </style>
