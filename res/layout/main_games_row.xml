@@ -3,9 +3,7 @@
     android:id="@+id/main_games_lists_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dp"
-    android:layout_marginTop="3dp"
-    android:background="#7F9F9F9F"
+    android:background="@drawable/main_games_row_bg_image"
     android:orientation="horizontal"
     android:padding="8dp" >
 
@@ -20,7 +18,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:text="@string/main_activity_games_row_game_default_name"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -30,7 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:text="@string/main_activity_games_row_game_default_description"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="12sp" />
     </LinearLayout>
 
