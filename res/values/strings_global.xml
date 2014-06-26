@@ -3,7 +3,7 @@
 
     <string name="app_name">reClick</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello reClick!</string>
+    <string name="hello_world">Hello reClick</string>
     <string name="application_json">application/json</string>
 
 </resources>

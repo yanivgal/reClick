@@ -3,9 +3,9 @@
     android:id="@+id/main_games_lists_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/main_games_row_bg_image"
+    android:background="@color/half_transparent_gray"
     android:orientation="horizontal"
-    android:padding="8dp" >
+    android:padding="4dp" >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:text="@string/main_activity_games_row_game_default_name"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:text="@string/main_activity_games_row_game_default_description"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -43,7 +43,7 @@
         android:paddingRight="15dp"
         android:paddingTop="10dp"
         android:text="@string/main_activity_join_or_enter_game_button_default_text"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         android:layout_alignParentRight="true" />
