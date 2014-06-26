@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <style name="main_content">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -8,37 +8,37 @@
         <item name="android:orientation">vertical</item>
         <item name="android:padding">20dp</item>
     </style>
-    
+
     <style name="logo.login_activity">
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">25dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
-    
+
     <style name="login_activity_label">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingBottom">5dp</item>
     </style>
-    
+
     <style name="login_activity_label.red">
-        <item name="android:background">#97282C</item>
+        <item name="android:background">@color/red</item>
     </style>
-    
+
     <style name="login_activity_label.blue">
-        <item name="android:background">#000BA4</item>
+        <item name="android:background">@color/blue</item>
     </style>
-    
+
     <style name="login_activity_label.green">
-        <item name="android:background">#0A7D00</item>
+        <item name="android:background">@color/green</item>
     </style>
-    
+
     <style name="login_activity_input">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -47,31 +47,42 @@
         <item name="android:textSize">18sp</item>
         <item name="android:padding">5dp</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLength">22</item>
     </style>
-    
+
     <style name="login_activity_input.password">
         <item name="android:inputType">textPassword</item>
     </style>
-    
+
     <style name="login_activity_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:background">@drawable/button</item>
     </style>
-    
+
     <style name="login_activity_text" parent="@style/text_shadow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">14dp</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
     </style>
-    
+
+    <style name="login_activity_text.ordinary">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="login_activity_text.link">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/bright_glow_blue</item>
+    </style>
+
 </resources>

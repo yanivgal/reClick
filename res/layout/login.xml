@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/main_container" >
-    
-    <include layout="@layout/footer"/>
+
+    <include layout="@layout/footer" />
 
     <LinearLayout
         android:id="@+id/login_activity_main_content"
-		style="@style/main_content" >
+        style="@style/main_content" >
 
         <TextView
             android:id="@+id/logo"
             style="@style/logo.login_activity"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name" />
 
         <TextView
             android:id="@+id/login_activity_username_label"
@@ -44,7 +44,6 @@
             <EditText
                 android:id="@+id/login_activity_nickname_input"
                 style="@style/login_activity_input" />
-
         </LinearLayout>
 
         <Button
@@ -66,18 +65,41 @@
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/login_activity_login_here_link"
-                style="@style/login_activity_text"
-                android:onClick="loginLink"
-                android:text="@string/login_activity_login_here_link"
-                android:visibility="gone" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/login_activity_sign_up_here_link"
-                style="@style/login_activity_text"
-                android:onClick="signUpLink"
-                android:text="@string/login_activity_sign_up_here_link" />
+                <TextView
+                    android:id="@+id/login_activity_login_here_text"
+                    style="@style/login_activity_text.ordinary"
+                    android:text="@string/login_activity_login_here_text_text"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/login_activity_login_here_link"
+                    style="@style/login_activity_text.link"
+                    android:onClick="loginLink"
+                    android:text="@string/login_activity_login_here_link_text"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/login_activity_sign_up_here_text"
+                    style="@style/login_activity_text.ordinary"
+                    android:text="@string/login_activity_sign_up_here_text_text" />
+
+                <TextView
+                    android:id="@+id/login_activity_sign_up_here_link"
+                    style="@style/login_activity_text.link"
+                    android:onClick="signUpLink"
+                    android:text="@string/login_activity_sign_up_here_link_text" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

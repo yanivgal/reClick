@@ -15,14 +15,14 @@
         android:padding="14dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:text="@string/main_activity_hello_user_default_textView_text" />
 
     <LinearLayout
         android:id="@+id/main_activity_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="18dp"
         android:orientation="vertical"
         android:padding="20dp" >
 
@@ -40,7 +40,7 @@
         <ListView
             android:id="@+id/main_activity_open_games_list"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="149dp"
             android:layout_marginBottom="20dp" >
         </ListView>
 
@@ -52,7 +52,7 @@
         <ListView
             android:id="@+id/main_activity_current_user_games_list"
             android:layout_width="match_parent"
-            android:layout_height="140dp" >
+            android:layout_height="149dp" >
         </ListView>
     </LinearLayout>
 

@@ -67,10 +67,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void createANewGameButtonClicked(View view) {
-		mainLayout.setVisibility(View.INVISIBLE);
-		settingsButton.setVisibility(View.INVISIBLE);
-		helloUser.setVisibility(View.INVISIBLE);
-		popUpLayout.setVisibility(View.VISIBLE);
+		showPopUpLayout();
 	}
 	
 	public void createGameButtonClicked(View view) {
@@ -91,7 +88,6 @@ public class MainActivity extends Activity {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
 				Log.e(TAG, response.getErrorMsg());
 			}
-			Log.e(TAG, response.getBody());
 			finish();
 			startActivity(getIntent());
 		}
@@ -100,12 +96,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		if (popUpLayout.getVisibility() == View.VISIBLE) {
-			popUpLayout.setVisibility(View.INVISIBLE);
-			mainLayout.setVisibility(View.VISIBLE);
-			settingsButton.setVisibility(View.VISIBLE);
-			helloUser.setVisibility(View.VISIBLE);
-			finish();
-			startActivity(getIntent());
+			hidePopUpLayout();
 		} else {
 			super.onBackPressed();
 		}
@@ -175,9 +166,23 @@ public class MainActivity extends Activity {
 	private OnTouchListener onTouchListener = new OnTouchListener() {
 		
 		@Override
-		public boolean onTouch(View v, MotionEvent event) {
+		public boolean onTouch(View view, MotionEvent event) {
 			App.hideSoftKeyboard(MainActivity.this);
 			return true;
 		}
 	};
+	
+	private void showPopUpLayout() {
+		mainLayout.setVisibility(View.INVISIBLE);
+		settingsButton.setVisibility(View.INVISIBLE);
+		helloUser.setVisibility(View.INVISIBLE);
+		popUpLayout.setVisibility(View.VISIBLE);
+	}
+	
+	private void hidePopUpLayout() {
+		popUpLayout.setVisibility(View.INVISIBLE);
+		mainLayout.setVisibility(View.VISIBLE);
+		settingsButton.setVisibility(View.VISIBLE);
+		helloUser.setVisibility(View.VISIBLE);
+	}
 }
