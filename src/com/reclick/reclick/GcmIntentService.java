@@ -21,6 +21,10 @@ public class GcmIntentService extends IntentService {
 		super("GcmIntentService");
 	}
 
+	/**
+	 * This method gets the GCM messages from the BrocastReceiver.
+	 * Here we decides what to do with the received GCM message.
+	 */
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
@@ -49,9 +53,8 @@ public class GcmIntentService extends IntentService {
             } else if (messageType.equals(
             		GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE)) {
             	
-            	// TODO do some work here
-            	
                 // Post notification of received message.
+            	// According to the given message activate the proper methods.
             	String notificationType = extras.getString("type");
             	if (notificationType.equals("move")) {
             		String message = extras.getString("message");
