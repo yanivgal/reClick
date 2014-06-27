@@ -12,6 +12,7 @@ import unite.Request;
 import unite.Response;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -57,6 +58,11 @@ public class MainActivity extends Activity {
 		
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
+		
+		IntentFilter filter = new IntentFilter(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        GcmUiUpdateReceiver receiver = new GcmUiUpdateReceiver(this);
+        registerReceiver(receiver, filter);
 	}
 	
 	public void settingsButtonClicked(View view) {

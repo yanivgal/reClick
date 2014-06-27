@@ -68,6 +68,11 @@ public class GamesAdapter extends BaseAdapter {
 		return 0;
 	}
 	
+	public void add(JSONObject game) {
+		games.put(game);
+		notifyDataSetChanged();
+	}
+	
 	private class ViewHolder {
 		String gameId;
 		String sequence;

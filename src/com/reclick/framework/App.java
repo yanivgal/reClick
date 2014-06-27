@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -58,8 +59,10 @@ public class App {
 	public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity
         		.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(
-        		activity.getCurrentFocus().getWindowToken(), 0);
+        View currentFocusView = activity.getCurrentFocus();
+        if (currentFocusView != null) {
+        	imm.hideSoftInputFromWindow(currentFocusView.getWindowToken(), 0);
+        }
 	}
 	
 	public static String getTag(Context context) {

@@ -1,5 +1,8 @@
 package com.reclick.reclick;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,9 +12,9 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
 public class GcmIntentService extends IntentService {
+	
+	private Map<String,Command> gcmCommands;
 	
 	public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
@@ -19,6 +22,13 @@ public class GcmIntentService extends IntentService {
 
 	public GcmIntentService() {
 		super("GcmIntentService");
+		
+		gcmCommands = new HashMap<String, GcmIntentService.Command>();
+		
+		gcmCommands.put("gameCreatedCommand", new GameCreatedCommand());
+		gcmCommands.put("gameCreatedCreatorCommand", new GameCreatedCreatorCommand());
+		gcmCommands.put("playerMadeHisMoveCommand", new PlayerMadeHisMoveCommand());
+		gcmCommands.put("playerFailedCommand", new PlayerFailedCommand());
 	}
 
 	/**
@@ -27,56 +37,61 @@ public class GcmIntentService extends IntentService {
 	 */
 	@Override
 	protected void onHandleIntent(Intent intent) {
-
+		Log.e("onHandleIntent", "GCM message");
 		Bundle extras = intent.getExtras();
-        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-        // The getMessageType() intent parameter must be the intent you
-        // received in your BroadcastReceiver.
-        String messageType = gcm.getMessageType(intent);
-        
-        if (!extras.isEmpty()) {
-        	Log.e("msg", extras.toString());
-            /*
-             * Filter messages based on message type. Since it is likely that
-             * GCM will be extended in the future with new message types, just
-             * ignore any message types you're not interested in, or that you
-             * don't recognize.
-             */
-            if (messageType.equals(
-            		GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR)) {
-                sendNotification("Send error: " + extras.toString(), "", "");
-            } else if (messageType.equals(
-            		GoogleCloudMessaging.MESSAGE_TYPE_DELETED)) {
-                sendNotification("Deleted messages on server: " +
-                        extras.toString(), "", "");
-            // If it's a regular GCM message, do some work.
-            } else if (messageType.equals(
-            		GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE)) {
-            	
-                // Post notification of received message.
-            	// According to the given message activate the proper methods.
-            	String notificationType = extras.getString("type");
-            	if (notificationType.equals("move")) {
-            		String message = extras.getString("message");
-                	String gameId = extras.getString("gameId");
-                	String sequence = extras.getString("sequence");
-                	sendNotification(message, gameId, sequence);
-            	} else if (notificationType.equals("fail")) {
-            		String message = extras.getString("message");
-            		sendPlayerFailedNotification(message);
-            	}
-            }
-        }
+		try {
+			gcmCommands.get(extras.getString("type")).exec(extras);
+		} catch (NullPointerException e) { }
         
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GcmBroadcastReceiver.completeWakefulIntent(intent);
+	}
 
+	private interface Command {
+		void exec(Bundle extras);
 	}
 	
-	// Put the message into a notification and post it.
-    // This is just one simple example of what you might choose to do with
-    // a GCM message.
-    private void sendNotification(String msg, String gameId, String sequence) {
+	private class GameCreatedCommand implements Command {
+		@Override
+		public void exec(Bundle extras) {			
+			Intent broadcastIntent = new Intent();
+			broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+			broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+			broadcastIntent.putExtras(extras);
+			sendBroadcast(broadcastIntent);
+		}
+	}
+	
+	private class GameCreatedCreatorCommand implements Command {
+		@Override
+		public void exec(Bundle extras) {			
+			Intent broadcastIntent = new Intent();
+			broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
+			broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+			broadcastIntent.putExtras(extras);
+			sendBroadcast(broadcastIntent);
+		}
+	}
+	
+	private class PlayerMadeHisMoveCommand implements Command {
+		@Override
+		public void exec(Bundle extras) {
+			String message = extras.getString("message");
+        	String gameId = extras.getString("gameId");
+        	String sequence = extras.getString("sequence");
+        	sendPlayerMadeHisMoveNotification(message, gameId, sequence);
+		}
+	}
+	
+	private class PlayerFailedCommand implements Command {
+		@Override
+		public void exec(Bundle extras) {
+			String message = extras.getString("message");
+    		sendPlayerFailedNotification(message);
+		}
+	}
+	
+    private void sendPlayerMadeHisMoveNotification(String msg, String gameId, String sequence) {
     	mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
     	
@@ -120,6 +135,5 @@ public class GcmIntentService extends IntentService {
     	
     	mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
-    }
-
+	}
 }
