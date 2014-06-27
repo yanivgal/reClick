@@ -39,6 +39,8 @@ public class MainActivity extends Activity {
 	private EditText gameName;
 	private EditText gameDescription;
 	
+	private GcmUiUpdateReceiver receiver;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,9 +61,30 @@ public class MainActivity extends Activity {
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
 		
-		IntentFilter filter = new IntentFilter(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
-        GcmUiUpdateReceiver receiver = new GcmUiUpdateReceiver(this);
+        receiver = new GcmUiUpdateReceiver(this);
+        registerReceiver(receiver, filter);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		unregisterReceiver(receiver);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new GcmUiUpdateReceiver(this);
         registerReceiver(receiver, filter);
 	}
 	

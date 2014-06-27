@@ -59,7 +59,7 @@ public class GamesAdapter extends BaseAdapter {
 	@Override
 	public long getItemId(int position) { // returns the game id of the game in the given position.
 		try {
-			return Long.parseLong(((JSONObject)games.get(position)).getString("gameId"));
+			return Long.parseLong(((JSONObject)games.get(position)).getString("id"));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
