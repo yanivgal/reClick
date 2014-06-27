@@ -152,10 +152,10 @@ public class LoginActivity extends Activity implements OnResponseListener {
 
 	private void sendSessionRequest(String url, List<NameValuePair> params) {
 		new Client()
-				.post(url)
-				.setHeader(HTTP.CONTENT_TYPE,
-						getString(R.string.application_json)).setParams(params)
-				.send(this);
+			.post(url)
+			.setHeader(HTTP.CONTENT_TYPE,
+					getString(R.string.application_json)).setParams(params)
+			.send(this);
 	}
 
 	@Override
@@ -173,9 +173,9 @@ public class LoginActivity extends Activity implements OnResponseListener {
 						.getJSONObject("data").getString("nickname"));
 				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 				finish();
+			} else {
+				App.showToast(LoginActivity.this, jsonResponse.getString("message"));
 			}
-			// App.showToast(LoginActivity.this,
-			// jsonResponse.getString("message"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

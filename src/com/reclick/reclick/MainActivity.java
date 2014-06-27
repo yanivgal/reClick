@@ -106,6 +106,8 @@ public class MainActivity extends Activity {
 		new Client()
 			.get(Urls.getGames(this))
 			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
+			.addParam("type", "open")
+			.addParam("butUsername", Prefs.getUsername(this))
 			.send(onOpenGamesResponseListener);
 	}
 	
@@ -134,9 +136,8 @@ public class MainActivity extends Activity {
 	
 	private void sendGetCurrentUserGamesListRequest() {
 		new Client()
-			.get(Urls.getGames(this))
+			.get(Urls.getUserGames(this, Prefs.getUsername(this)))
 			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
-			.addParam("username", Prefs.getUsername(this))
 			.send(onCurrUserGamesResponseListener);
 	}
 	
