@@ -20,6 +20,16 @@ public class Urls {
 		return buildUrl(context, context.getString(R.string.games_collection));
 	}
 	
+	public static String getUserGames(Context context, String username) {
+		return buildUrl(context,
+						context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
+							+ File.separator
+							+ context.getString(R.string.games_collection)
+						);
+	}
+	
 	public static String createGame(Context context) {
 		return buildUrl(context, context.getString(R.string.games_collection));
 	}
