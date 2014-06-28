@@ -75,7 +75,7 @@
 
         <EditText
             android:id="@+id/main_activity_create_game_popup_menu_game_name_editText"
-            style="@style/login_activity_input" />
+            style="@style/login_activity_input.name" />
 
         <TextView
             style="@style/login_activity_label.blue"
@@ -83,7 +83,7 @@
 
         <EditText
             android:id="@+id/main_activity_create_game_popup_menu_game_description_editText"
-            style="@style/login_activity_input" />
+            style="@style/login_activity_input.description" />
 
         <Button
             android:id="@+id/main_activity_create_game_popup_menu_create_game_button"

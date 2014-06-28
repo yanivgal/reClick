@@ -3,6 +3,8 @@ package com.reclick.reclick;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.reclick.framework.App;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;

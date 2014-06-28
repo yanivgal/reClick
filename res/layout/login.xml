@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/login_activity_username_input"
-            style="@style/login_activity_input" />
+            style="@style/login_activity_input.name" />
 
         <TextView
             android:id="@+id/login_activity_password_label"
@@ -43,7 +43,7 @@
 
             <EditText
                 android:id="@+id/login_activity_nickname_input"
-                style="@style/login_activity_input" />
+                style="@style/login_activity_input.name" />
         </LinearLayout>
 
         <Button
