@@ -61,31 +61,39 @@ public class MainActivity extends Activity {
 		sendGetOpenGamesListRequest();
 		sendGetCurrentUserGamesListRequest();
 		
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
-		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-        receiver = new GcmUiUpdateReceiver(this);
-        registerReceiver(receiver, filter);
+		if (receiver == null) {
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
+	        filter.addCategory(Intent.CATEGORY_DEFAULT);
+	        receiver = new GcmUiUpdateReceiver(this);
+	        registerReceiver(receiver, filter);
+		}
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
 		
-		unregisterReceiver(receiver);
+		if (receiver != null) {
+			unregisterReceiver(receiver);
+			receiver = null;
+		}
+		Log.e("MainActivity", "Unregistered Receiver in onPause");
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
-		filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-        receiver = new GcmUiUpdateReceiver(this);
-        registerReceiver(receiver, filter);
+		if (receiver == null) {
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
+	        filter.addCategory(Intent.CATEGORY_DEFAULT);
+	        receiver = new GcmUiUpdateReceiver(this);
+	        registerReceiver(receiver, filter);
+		}
 	}
 	
 	public void settingsButtonClicked(View view) {
