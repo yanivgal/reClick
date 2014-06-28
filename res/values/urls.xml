@@ -3,7 +3,7 @@
 
     <string name="scheme">http</string>
     
-    <string name="host">192.168.1.10</string>
+    <string name="host">192.168.14.130</string>
     
     <string name="path_prefix">reclick</string>
     
@@ -11,6 +11,7 @@
     <string name="method_sign_up">sign-up</string>
     <string name="method_start">start</string>
     <string name="method_sequence">sequence</string>
+    <string name="method_location">location</string>
     
     <string name="games_collection">games</string>
     <string name="players_collection">players</string>

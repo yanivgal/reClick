@@ -11,11 +11,12 @@ public class Prefs {
 	public static final String PROPERTY_GCM_REG_ID = "gcmRegistrationId";
 	public static final String PROPERTY_USERNAME = "username";
 	public static final String PROPERTY_NICKNAME = "nickname";
+	public static final String PROPERTY_LOCATION_SERVICE_ON = "isLocationServiceOn";
 	
 	public static SharedPreferences preferences(Context context) {
 		return context.getSharedPreferences(
-				context.getString(R.string.app_name),
-				Context.MODE_PRIVATE
+					context.getString(R.string.app_name),
+					Context.MODE_PRIVATE
 				);
 	}
 	
@@ -45,6 +46,14 @@ public class Prefs {
 	
 	public static void setUsername(Context context, String value) {
 		set(context, PROPERTY_USERNAME, value);
+	}
+	
+	public static boolean getLocationServiceStatus(Context context) {
+		return (Boolean) get(context, PROPERTY_LOCATION_SERVICE_ON, false);
+	}
+	
+	public static void setLocationServiceStatus(Context context, boolean value) {
+		set(context, PROPERTY_LOCATION_SERVICE_ON, value);
 	}
 	
 	public static String getNickname(Context context) {

@@ -82,6 +82,16 @@ public class Urls {
 						);
 	}
 	
+	public static String setPlayerLocation(Context context, String username) {
+		return buildUrl(context,
+						context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
+							+ File.separator
+							+ context.getString(R.string.method_location)
+						);
+	}
+	
 	private static String buildUrl(Context context, String pathSuffix) {
 		return context.getString(R.string.scheme)
 				+ File.pathSeparator
