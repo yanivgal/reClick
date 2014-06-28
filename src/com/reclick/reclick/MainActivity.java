@@ -117,6 +117,7 @@ public class MainActivity extends Activity {
 			request.addParam("gameDescription", gameDescription.getText().toString());
 		}
 		request.send(onCreateGameResponseListener);
+		hidePopUpLayout();
 	}
 	
 	private OnResponseListener onCreateGameResponseListener = new OnResponseListener() {
@@ -124,8 +125,6 @@ public class MainActivity extends Activity {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
 				Log.e(TAG, response.getErrorMsg());
 			}
-			finish();
-			startActivity(getIntent());
 		}
 	};
 	

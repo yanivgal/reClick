@@ -10,8 +10,8 @@
     </style>
 
     <style name="logo.login_activity">
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">25dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">30dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
@@ -48,11 +48,21 @@
         <item name="android:padding">5dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:maxLength">22</item>
     </style>
 
     <style name="login_activity_input.password">
         <item name="android:inputType">textPassword</item>
+        <item name="android:maxLength">10</item>
+    </style>
+
+    <style name="login_activity_input.name">
+        <item name="android:inputType">text</item>
+        <item name="android:maxLength">22</item>
+    </style>
+
+    <style name="login_activity_input.description">
+        <item name="android:inputType">text</item>
+        <item name="android:maxLength">32</item>
     </style>
 
     <style name="login_activity_button">
