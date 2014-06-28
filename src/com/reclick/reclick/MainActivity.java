@@ -79,7 +79,6 @@ public class MainActivity extends Activity {
 			unregisterReceiver(receiver);
 			receiver = null;
 		}
-		Log.e("MainActivity", "Unregistered Receiver in onPause");
 	}
 	
 	@Override
