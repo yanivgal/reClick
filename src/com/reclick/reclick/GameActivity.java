@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,6 +27,7 @@ public class GameActivity extends Activity {
 	
 	String gameId;
 	String sequenceString;
+	String correctStep;
 	
 	ArrayList<String> sequence;
 	
@@ -47,11 +49,9 @@ public class GameActivity extends Activity {
 		} else {
 			sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
 		}
-		
-		int s = sequence.size();
 			
 		if (!sequence.isEmpty()) {
-			animateLastSequence();
+			animateSequence(sequence, false);
 		}
 	}
 	
@@ -71,11 +71,27 @@ public class GameActivity extends Activity {
 		}
 		
 		if (!correctStep(tileNum)) {
-			playerFailed();
-			finish();
-			startActivity(new Intent(this, MainActivity.class));
-			return;
+			showCorrectStep();
 		}
+	}
+	
+	private void endGame() {
+		new Client()
+			.delete(Urls.deletePlayerFromGame(this, gameId, Prefs.getUsername(this)))
+			.send();
+		
+		finish();
+		startActivity(new Intent(this, MainActivity.class));
+		return;
+	}
+	
+	private void showCorrectStep() {
+		ArrayList<String> correctTileSequence = new ArrayList<String>();
+		int numOfBlinks = 5;
+		for (int i = 0; i < numOfBlinks; i++) {
+			correctTileSequence.add(correctStep);
+		}
+		animateSequence(correctTileSequence, true);
 	}
 	
 	private void appendNewStep(int tileNum) {
@@ -95,42 +111,46 @@ public class GameActivity extends Activity {
 		App.showToast(this, "Nice Move");
 	}
 	
-	private void playerFailed() {
-		new Client()
-			.delete(Urls.deletePlayerFromGame(this, gameId, Prefs.getUsername(this)))
-			.send();
-		
-		App.showToast(this, "Game Over");
-	}
-	
 	private boolean correctStep(int tileNum) {
-		int sequenceStep = Integer.parseInt(sequence.remove(0));
-		return tileNum == sequenceStep;
+		correctStep = sequence.remove(0);
+		return tileNum == Integer.parseInt(correctStep);
 	}
 
-	private void animateLastSequence() {
+	private void animateSequence(final ArrayList<String> sequence, final boolean endSequence) {
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				Executor executor = Executors.newSingleThreadExecutor();
+				int i = 1;
 				for (String tileNum : sequence) {
-					executor.execute(new TileAnimationRunnable(Integer
-							.parseInt(tileNum)));
+					if (i++ == sequence.size() && endSequence) {
+						executor.execute(new TileAnimationRunnable(
+								Integer.parseInt(tileNum), true));
+					} else {
+						executor.execute(new TileAnimationRunnable(
+								Integer.parseInt(tileNum), false));
+					}
 				}
 			}
-		}, 2000);
+		}, 1000);
 	}
 	
 	private class TileAnimationRunnable implements Runnable {
 		
 		private int tileNum;
+		private boolean lastTile;
 		
-		public TileAnimationRunnable(int tileNum) {
+		public TileAnimationRunnable(int tileNum, boolean lastTile) {
 			this.tileNum = tileNum;
+			this.lastTile = lastTile;
 		}
 		
 		public void run() {
+			if (Looper.myLooper() == null) {
+		        Looper.prepare();
+			}
+			
 			pressTileHandler.sendEmptyMessage(tileNum);
 			
 			try {
@@ -142,6 +162,10 @@ public class GameActivity extends Activity {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) { }
+			
+			if (lastTile) {
+				endGame();
+			}
 		}
 	}
 	
