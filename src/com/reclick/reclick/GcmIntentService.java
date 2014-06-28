@@ -29,6 +29,7 @@ public class GcmIntentService extends IntentService {
 		gcmCommands.put("gameCreatedCreatorCommand", new GameCreatedCreatorCommand());
 		gcmCommands.put("playerMadeHisMoveCommand", new PlayerMadeHisMoveCommand());
 		gcmCommands.put("playerFailedCommand", new PlayerFailedCommand());
+		gcmCommands.put("youWonCommand", new YouWonCommand());
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class GcmIntentService extends IntentService {
 			String message = extras.getString("message");
         	String gameId = extras.getString("gameId");
         	String sequence = extras.getString("sequence");
-        	sendPlayerMadeHisMoveNotification(message, gameId, sequence);
+        	sendOpenSpecificGameNotification(message, gameId, sequence);
 		}
 	}
 	
@@ -87,53 +88,52 @@ public class GcmIntentService extends IntentService {
 		@Override
 		public void exec(Bundle extras) {
 			String message = extras.getString("message");
-    		sendPlayerFailedNotification(message);
+    		sendOpenReClickNotification(message);
 		}
 	}
 	
-    private void sendPlayerMadeHisMoveNotification(String msg, String gameId, String sequence) {
-    	mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
-    	
-    	Intent intent = new Intent(this, GameActivity.class);
-    	intent.putExtra("gameId", gameId);
-    	intent.putExtra("sequence", sequence);
+	private class YouWonCommand implements Command {
+		@Override
+		public void exec(Bundle extras) {
+			String message = extras.getString("message");
+    		sendOpenReClickNotification(message);
+		}
+	}
+    
+    private void sendOpenReClickNotification(String message) {
+    	Intent intent = new Intent(this, MainActivity.class);
     	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	
-    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    	sendNotification(intent, message);
+	}
+    
+    private void sendOpenSpecificGameNotification(
+    		String message, String gameId, String gameSequence) {
+    	Intent intent = new Intent(this, GameActivity.class);
+    	intent.putExtra("gameId", gameId);
+    	intent.putExtra("sequence", gameSequence);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	
+    	sendNotification(intent, message);
+    }
+    
+    private void sendNotification(Intent intent, String message) {
+    	mNotificationManager = (NotificationManager)
+    			getSystemService(Context.NOTIFICATION_SERVICE);
+    	
+    	PendingIntent contentIntent = PendingIntent.getActivity(
+    			this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     	
     	NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-        .setSmallIcon(R.drawable.ic_launcher)
-        .setContentTitle("reClick")
-        .setStyle(new NotificationCompat.BigTextStyle()
-        .bigText(msg))
-        .setContentText(msg)
-        .setAutoCancel(true);
+	        .setSmallIcon(R.drawable.ic_launcher)
+	        .setContentTitle("reClick")
+	        .setStyle(new NotificationCompat.BigTextStyle()
+	        .bigText(message))
+	        .setContentText(message)
+	        .setAutoCancel(true);
     	
     	mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
-    
-    private void sendPlayerFailedNotification(String msg) {
-    	mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
-    	
-    	Intent intent = new Intent(this, MainActivity.class);
-    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    	
-    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    	
-    	NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-        .setSmallIcon(R.drawable.ic_launcher)
-        .setContentTitle("reClick")
-        .setStyle(new NotificationCompat.BigTextStyle()
-        .bigText(msg))
-        .setContentText(msg)
-        .setAutoCancel(true);
-    	
-    	mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
-	}
 }
