@@ -58,6 +58,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
 
         <meta-data

@@ -15,8 +15,6 @@ import android.util.Log;
 public class GcmIntentService extends IntentService {
 	
 	private Map<String,Command> gcmCommands;
-	
-	public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
 
@@ -140,7 +138,8 @@ public class GcmIntentService extends IntentService {
 	        .setAutoCancel(true);
     	
     	mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        mNotificationManager.notify(getResources()
+        		.getInteger(R.integer.gcm_notification_id), mBuilder.build());
     }
     
     private void showPopUpMessage(String message, String gameId, String sequence) {
