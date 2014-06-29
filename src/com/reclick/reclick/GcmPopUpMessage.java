@@ -31,7 +31,10 @@ public class GcmPopUpMessage extends Activity {
 	}
 	
 	public void confirmButtonClicked(View view) {
-		((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
+		((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
+			.cancel(getResources()
+			.getInteger(R.integer.gcm_notification_id));
+		
 		startActivity(goToIntent);
 		finish();
 	}

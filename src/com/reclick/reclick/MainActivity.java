@@ -221,4 +221,10 @@ public class MainActivity extends Activity {
 		settingsButton.setVisibility(View.VISIBLE);
 		helloUser.setVisibility(View.VISIBLE);
 	}
+	
+//	@Override
+//	protected void onUserLeaveHint() {
+//		super.onUserLeaveHint();
+//		finish();
+//	}
 }
