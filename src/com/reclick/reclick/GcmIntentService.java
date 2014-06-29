@@ -42,7 +42,7 @@ public class GcmIntentService extends IntentService {
 		Bundle extras = intent.getExtras();
 		try {
 			gcmCommands.get(extras.getString("type")).exec(extras);
-		} catch (NullPointerException e) { }
+		} catch (NullPointerException e) {}
         
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GcmBroadcastReceiver.completeWakefulIntent(intent);
@@ -65,7 +65,7 @@ public class GcmIntentService extends IntentService {
 	
 	private class GameCreatedCreatorCommand implements Command {
 		@Override
-		public void exec(Bundle extras) {			
+		public void exec(Bundle extras) {
 			Intent broadcastIntent = new Intent();
 			broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
 			broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
@@ -81,6 +81,8 @@ public class GcmIntentService extends IntentService {
         	String gameId = extras.getString("gameId");
         	String sequence = extras.getString("sequence");
         	sendOpenSpecificGameNotification(message, gameId, sequence);
+        	
+        	showPopUpMessage(message, gameId, sequence);
 		}
 	}
 	
@@ -89,6 +91,8 @@ public class GcmIntentService extends IntentService {
 		public void exec(Bundle extras) {
 			String message = extras.getString("message");
     		sendOpenReClickNotification(message);
+    		
+    		showPopUpMessage(message, null, null);
 		}
 	}
 	
@@ -97,6 +101,8 @@ public class GcmIntentService extends IntentService {
 		public void exec(Bundle extras) {
 			String message = extras.getString("message");
     		sendOpenReClickNotification(message);
+    		
+    		showPopUpMessage(message, null, null);
 		}
 	}
     
@@ -135,5 +141,18 @@ public class GcmIntentService extends IntentService {
     	
     	mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+    
+    private void showPopUpMessage(String message, String gameId, String sequence) {
+    	Intent popUpIntent = new Intent(GcmIntentService.this, GcmPopUpMessage.class);
+    	popUpIntent.putExtra("message", message);
+    	if (gameId != null) {
+    		popUpIntent.putExtra("gameId", gameId);
+    	}
+    	if (sequence != null) {
+    		popUpIntent.putExtra("sequence", sequence);
+    	}
+    	popUpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    	startActivity(popUpIntent);
     }
 }

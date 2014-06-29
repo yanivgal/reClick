@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_pop_up_message_default_text">Message</string>
+    <string name="gcm_pop_up_message_confirm_button_text">Confirm</string>
+    <string name="gcm_pop_up_message_later_button_text">Later</string>
+</resources>
