@@ -50,5 +50,9 @@
         </LinearLayout>
 
     </LinearLayout>
+    
+    <TextView
+        android:id="@+id/game_game_message"
+        style="@style/game_activity_game_message" />
 
 </FrameLayout>

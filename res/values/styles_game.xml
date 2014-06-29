@@ -47,5 +47,14 @@
         <item name="android:layout_marginLeft">2dp</item>
         <item name="android:src">@drawable/yellow_button</item>
     </style>
+    
+    <style name="game_activity_game_message" parent="@style/text_shadow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
 
 </resources>

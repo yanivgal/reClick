@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="game_activity_success_messages">
+        <item>@string/game_activity_success_message_1</item>
+        <item>@string/game_activity_success_message_2</item>
+        <item>@string/game_activity_success_message_3</item>
+        <item>@string/game_activity_success_message_4</item>
+        <item>@string/game_activity_success_message_5</item>
+        <item>@string/game_activity_success_message_6</item>
+        <item>@string/game_activity_success_message_7</item>
+        <item>@string/game_activity_success_message_8</item>
+        <item>@string/game_activity_success_message_9</item>
+    </string-array>
+    
+    <string name="game_activity_success_message_1">Well Done</string>
+    <string name="game_activity_success_message_2">Nice Move</string>
+    <string name="game_activity_success_message_3">Superb</string>
+    <string name="game_activity_success_message_4">Good</string>
+    <string name="game_activity_success_message_5">Fantastic</string>
+    <string name="game_activity_success_message_6">Excellent</string>
+    <string name="game_activity_success_message_7">Splendid</string>
+    <string name="game_activity_success_message_8">Outstanding</string>
+    <string name="game_activity_success_message_9">Thumbs Up</string>
+    
+    <string name="game_activity_game_over_message">Game Over</string>
+    
+</resources>

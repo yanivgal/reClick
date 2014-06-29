@@ -2,6 +2,7 @@ package com.reclick.reclick;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -15,8 +16,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.reclick.framework.App;
 import com.reclick.framework.Prefs;
@@ -31,6 +34,8 @@ public class GameActivity extends Activity {
 	
 	ArrayList<String> sequence;
 	
+	TextView gameMessage;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +47,8 @@ public class GameActivity extends Activity {
 		}
 		
 		setContentView(R.layout.game);
+		
+		gameMessage = (TextView) findViewById(R.id.game_game_message);
 		
 		if (sequenceString == null || sequenceString.equals("null")) {
 			sequenceString = "";
@@ -63,10 +70,26 @@ public class GameActivity extends Activity {
 		int tileNum = Integer.parseInt((String) view.getTag());
 
 		if (sequence.isEmpty()) {
+			String[] successMessages = getResources().getStringArray(R.array.game_activity_success_messages);
+			String randomSuccessMessage = successMessages[new Random().nextInt(successMessages.length)];
+			gameMessage.setText(randomSuccessMessage);
+			gameMessage.setVisibility(View.VISIBLE);
+			
 			appendNewStep(tileNum);
 			sendPlayerMove();
-			finish();
-			startActivity(new Intent(this, MainActivity.class));
+			
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) { }
+
+					finish();
+					startActivity(new Intent(GameActivity.this, MainActivity.class));
+				}
+			}).start();
 			return;
 		}
 		
@@ -75,15 +98,29 @@ public class GameActivity extends Activity {
 		}
 	}
 	
-	private void endGame() {
-		new Client()
-			.delete(Urls.deletePlayerFromGame(this, gameId, Prefs.getUsername(this)))
-			.send();
-		
-		finish();
-		startActivity(new Intent(this, MainActivity.class));
-		return;
-	}
+	private Handler endGameHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			new Client()
+				.delete(Urls.deletePlayerFromGame(GameActivity.this, gameId, Prefs.getUsername(GameActivity.this)))
+				.send();
+			
+			gameMessage.setText(getString(R.string.game_activity_game_over_message));
+			gameMessage.setVisibility(View.VISIBLE);
+			
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) { }
+
+					finish();
+					startActivity(new Intent(GameActivity.this, MainActivity.class));
+				}
+			}).start();
+		};
+	};
 	
 	private void showCorrectStep() {
 		ArrayList<String> correctTileSequence = new ArrayList<String>();
@@ -107,8 +144,6 @@ public class GameActivity extends Activity {
 			.setHeader(HTTP.CONTENT_TYPE, this.getString(R.string.application_json))
 			.addParam("sequence", sequenceString)
 			.send();
-		
-		App.showToast(this, "Nice Move");
 	}
 	
 	private boolean correctStep(int tileNum) {
@@ -164,7 +199,7 @@ public class GameActivity extends Activity {
 			} catch (InterruptedException e) { }
 			
 			if (lastTile) {
-				endGame();
+				endGameHandler.sendEmptyMessage(0);
 			}
 		}
 	}
