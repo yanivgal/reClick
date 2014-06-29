@@ -1,6 +1,7 @@
 package com.reclick.reclick;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class GcmPopUpMessage extends Activity {
 	}
 	
 	public void confirmButtonClicked(View view) {
+		((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
 		startActivity(goToIntent);
 		finish();
 	}
