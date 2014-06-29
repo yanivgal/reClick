@@ -28,28 +28,33 @@ public class LocationService extends Service implements LocationListener {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (locationManager == null) {
-			locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		}
-		new Thread() {
-			public void run() {
-				Looper.prepare();
-				getResources().getInteger(R.integer.min_time);
-				locationManager.requestLocationUpdates(
-						LocationManager.GPS_PROVIDER,
-						getResources().getInteger(R.integer.min_time),
-						getResources().getInteger(R.integer.min_distance),
-						LocationService.this
-				);
-				locationManager.requestLocationUpdates(
-						LocationManager.NETWORK_PROVIDER,
-						getResources().getInteger(R.integer.min_time),
-						getResources().getInteger(R.integer.min_distance),
-						LocationService.this
-				);
-				Looper.loop();
+		if (!Prefs.getLocationServiceStatus(this)) {
+			Prefs.setLocationServiceStatus(this, true);
+			
+			if (locationManager == null) {
+				locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			}
-		}.start();
+			
+			new Thread() {
+				public void run() {
+					Looper.prepare();
+					getResources().getInteger(R.integer.min_time);
+					locationManager.requestLocationUpdates(
+							LocationManager.GPS_PROVIDER,
+							getResources().getInteger(R.integer.min_time),
+							getResources().getInteger(R.integer.min_distance),
+							LocationService.this
+					);
+					locationManager.requestLocationUpdates(
+							LocationManager.NETWORK_PROVIDER,
+							getResources().getInteger(R.integer.min_time),
+							getResources().getInteger(R.integer.min_distance),
+							LocationService.this
+					);
+					Looper.loop();
+				}
+			}.start();
+		}
 
 		return START_STICKY;
 	}
@@ -59,10 +64,11 @@ public class LocationService extends Service implements LocationListener {
 
 		if (location != null) {
 			new Client()
-			.post(Urls.setPlayerLocation(this, Prefs.getUsername(this)))
-				.setHeader(HTTP.CONTENT_TYPE, "application/json")
+				.post(Urls.setPlayerLocation(this, Prefs.getUsername(this)))
+				.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
 				.addParam("latitude", Double.toString(location.getLatitude()))
-				.addParam("longitude", Double.toString(location.getLongitude())).send();
+				.addParam("longitude", Double.toString(location.getLongitude()))
+				.send();
 		}
 	}
 
@@ -78,8 +84,12 @@ public class LocationService extends Service implements LocationListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (locationManager != null) {
-			locationManager.removeUpdates(LocationService.this);
+		if (Prefs.getLocationServiceStatus(this)) {
+			Prefs.setLocationServiceStatus(this, false);
+			if (locationManager != null) {
+				locationManager.removeUpdates(LocationService.this);
+				locationManager = null;
+			}
 		}
 	}
 }

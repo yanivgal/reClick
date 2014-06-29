@@ -48,20 +48,20 @@ public class Prefs {
 		set(context, PROPERTY_USERNAME, value);
 	}
 	
-	public static boolean getLocationServiceStatus(Context context) {
-		return (Boolean) get(context, PROPERTY_LOCATION_SERVICE_ON, false);
-	}
-	
-	public static void setLocationServiceStatus(Context context, boolean value) {
-		set(context, PROPERTY_LOCATION_SERVICE_ON, value);
-	}
-	
 	public static String getNickname(Context context) {
 		return (String) get(context, PROPERTY_NICKNAME, "");
 	}
 	
 	public static void setNickname(Context context, String value) {
 		set(context, PROPERTY_NICKNAME, value);
+	}
+	
+	public static boolean getLocationServiceStatus(Context context) {
+		return (Boolean) get(context, PROPERTY_LOCATION_SERVICE_ON, false);
+	}
+
+	public static void setLocationServiceStatus(Context context, boolean value) {
+		set(context, PROPERTY_LOCATION_SERVICE_ON, value);
 	}
 	
 	public static void removePref(Context context, String key) {
