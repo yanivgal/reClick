@@ -1,5 +1,6 @@
 package com.reclick.reclick;
 
+import java.io.File;
 import java.io.IOException;
 
 import android.content.Context;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="gcm_pop_up_message_main_container">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="gcm_pop_up_message_message_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:text">@string/gcm_pop_up_message_default_text</item>
+    </style>
+
+    <style name="gcm_pop_up_message_buttons_container">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="gcm_pop_up_message_button">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="gcm_pop_up_message_button.confirm">
+        <item name="android:text">@string/gcm_pop_up_message_confirm_button_text</item>
+        <item name="android:background">@drawable/gcm_pop_up_confirm_button</item>
+    </style>
+
+    <style name="gcm_pop_up_message_button.later">
+        <item name="android:text">@string/gcm_pop_up_message_later_button_text</item>
+        <item name="android:background">@drawable/gcm_pop_up_later_button</item>
+    </style>
+
+</resources>

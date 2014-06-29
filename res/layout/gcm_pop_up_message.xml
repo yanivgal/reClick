@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gcm_pop_up_message"
+    style="@style/gcm_pop_up_message_main_container" >
+
+    <TextView
+        android:id="@+id/gcm_pop_up_message_text"
+        style="@style/gcm_pop_up_message_message_text" />
+
+    <LinearLayout
+        android:id="@+id/gcm_pop_up_message_buttons"
+        style="@style/gcm_pop_up_message_buttons_container" >
+
+        <Button
+            android:id="@+id/gcm_pop_up_message_confirm_button"
+            style="@style/gcm_pop_up_message_button.confirm"
+            android:onClick="confirmButtonClicked" />
+
+        <Button
+            android:id="@+id/gcm_pop_up_message_later_button"
+            style="@style/gcm_pop_up_message_button.later"
+            android:onClick="laterButtonClicked" />
+    </LinearLayout>
+
+</LinearLayout>

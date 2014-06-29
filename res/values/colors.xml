@@ -6,16 +6,20 @@
     <color name="shadow_black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#97282C</color>
+    <color name="red_dark">#8B2428</color>
     <color name="blue">#000BA4</color>
+    <color name="blue_dark">#000986</color>
     <color name="green">#0A7D00</color>
+    <color name="green_dark">#096B01</color>
     <color name="bright_glow_blue">#0C9BCB</color>
     <color name="half_transparent_gray">#7F9F9F9F</color>
+    <color name="bright_gray">#ffd7d7d7</color>
     
 <!--     <color name="cyan">#ff00ffff</color> -->
 <!--     <color name="cyan_ocean">#ff43b3e9</color> -->
 <!--     <color name="cyan_faded"> #ff72c9f7</color> -->
 <!--     <color name="dark_blue">#ff232136</color> -->
 <!--     <color name="red_warn">#ffe32929</color> -->
-<!--     <color name="transparent">#00000000</color> -->
+    <color name="transparent">#00000000</color>
 
 </resources>
