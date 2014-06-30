@@ -6,9 +6,15 @@ import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import unite.Client;
+import unite.OnResponseListener;
+import unite.Response;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +25,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.reclick.framework.App;
@@ -28,13 +35,11 @@ import com.reclick.request.Urls;
 @SuppressLint("HandlerLeak")
 public class GameActivity extends Activity {
 	
-	String gameId;
-	String sequenceString;
-	String correctStep;
-	
-	ArrayList<String> sequence;
-	
-	TextView gameMessage;
+	private String gameId;
+	private String sequenceString;
+	private String correctStep;
+	private ArrayList<String> sequence;
+	private TextView gameMessage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,9 @@ public class GameActivity extends Activity {
 			gameId = extras.getString("gameId");
 			sequenceString = extras.getString("sequence");
 		}
+		
+		startService(new Intent(this, com.reclick.features.LocationService.class));
+		sendGetGamePlayersInfoRequest();
 		
 		setContentView(R.layout.game);
 		
@@ -62,6 +70,34 @@ public class GameActivity extends Activity {
 		}
 	}
 	
+	private void sendGetGamePlayersInfoRequest() {
+		new Client()
+			.get(Urls.getGame(this, gameId))
+			.setHeader(HTTP.CONTENT_TYPE, getString(R.string.application_json))
+			.send(onGamePlayersInfoResponseListener);
+	}
+	
+	private OnResponseListener onGamePlayersInfoResponseListener = new OnResponseListener() {
+		
+		@Override
+		public void onResponseReceived(Response response) {
+			if (response.getStatusCode() != HttpStatus.SC_OK) {
+				Log.e(App.getTag(GameActivity.this), response.getErrorMsg());
+				return;
+			}
+			try {
+				JSONObject jsonResponse = response.getJsonBody();
+				if (jsonResponse.getString("status").equals("success")) {
+					JSONArray players = jsonResponse.getJSONObject("data").getJSONObject("game").getJSONArray("players");
+					RivalsAdapter rivalsAdapter = new RivalsAdapter(GameActivity.this, players);
+					((ListView) findViewById(R.id.game_activity_rivals_info_list)).setAdapter(rivalsAdapter);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+
 	public void tileClicked(View view) {
 		handleStep(view);
 	}
@@ -190,13 +226,13 @@ public class GameActivity extends Activity {
 			
 			try {
 				Thread.sleep(350);
-			} catch (InterruptedException e) { }
+			} catch (InterruptedException e) {}
 			
 			unpressTileHandler.sendEmptyMessage(tileNum);
 			
 			try {
 				Thread.sleep(100);
-			} catch (InterruptedException e) { }
+			} catch (InterruptedException e) {}
 			
 			if (lastTile) {
 				endGameHandler.sendEmptyMessage(0);
@@ -233,6 +269,12 @@ public class GameActivity extends Activity {
 		Prefs.removePref(this, Prefs.PROPERTY_USERNAME);
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
+		finish();
+	}
+	
+	@Override
+	protected void onUserLeaveHint() {
+		super.onUserLeaveHint();
 		finish();
 	}
 }
