@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
@@ -67,5 +68,23 @@ public class App {
 	
 	public static String getTag(Context context) {
 		return context.getClass().getSimpleName();
+	}
+	
+	public static void startLocationService(Context context) {
+		context.startService(
+					new Intent(
+						context,
+						com.reclick.features.LocationService.class
+					)
+		);
+	}
+	
+	public static void stopLocationService(Context context) {
+		context.stopService(
+				new Intent(
+					context,
+					com.reclick.features.LocationService.class
+				)
+		);
 	}
 }

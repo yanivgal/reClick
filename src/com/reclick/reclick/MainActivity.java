@@ -68,6 +68,8 @@ public class MainActivity extends Activity {
 	        receiver = new GcmUiUpdateReceiver(this);
 	        registerReceiver(receiver, filter);
 		}
+		
+		App.startLocationService(this);
 	}
 	
 	@Override
@@ -78,6 +80,8 @@ public class MainActivity extends Activity {
 			unregisterReceiver(receiver);
 			receiver = null;
 		}
+		
+		App.stopLocationService(this);
 	}
 	
 	@Override
@@ -92,6 +96,8 @@ public class MainActivity extends Activity {
 	        receiver = new GcmUiUpdateReceiver(this);
 	        registerReceiver(receiver, filter);
 		}
+		
+		App.stopLocationService(this);
 	}
 	
 	public void settingsButtonClicked(View view) {
@@ -221,9 +227,15 @@ public class MainActivity extends Activity {
 		helloUser.setVisibility(View.VISIBLE);
 	}
 	
+//	@Override
+//	protected void onUserLeaveHint() {
+//		super.onUserLeaveHint();
+//		finish();
+//	}
+	
 	@Override
-	protected void onUserLeaveHint() {
-		super.onUserLeaveHint();
-		finish();
+	protected void onDestroy() {
+		super.onDestroy();
+		App.stopLocationService(this);
 	}
 }
