@@ -281,18 +281,18 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		App.stopLocationService(this);
+//		App.stopLocationService(this);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		App.startLocationService(this);
+//		App.startLocationService(this);
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		App.stopLocationService(this);
+//		App.stopLocationService(this);
 	}
 }
