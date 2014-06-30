@@ -51,7 +51,7 @@ public class GameActivity extends Activity {
 			sequenceString = extras.getString("sequence");
 		}
 		
-		startService(new Intent(this, com.reclick.features.LocationService.class));
+		App.startLocationService(this);
 		sendGetGamePlayersInfoRequest();
 		
 		setContentView(R.layout.game);
@@ -272,9 +272,27 @@ public class GameActivity extends Activity {
 		finish();
 	}
 	
+//	@Override
+//	protected void onUserLeaveHint() {
+//		super.onUserLeaveHint();
+//		finish();
+//	}
+	
 	@Override
-	protected void onUserLeaveHint() {
-		super.onUserLeaveHint();
-		finish();
+	protected void onPause() {
+		super.onPause();
+		App.stopLocationService(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		App.startLocationService(this);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		App.stopLocationService(this);
 	}
 }
