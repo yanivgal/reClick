@@ -31,7 +31,6 @@ import com.reclick.request.Urls;
 
 public class MainActivity extends Activity {
 	
-	private final String TAG = this.getClass().getSimpleName();
 	private LinearLayout mainLayout;
 	private LinearLayout popUpLayout;
 	private ImageButton settingsButton;
@@ -123,7 +122,7 @@ public class MainActivity extends Activity {
 	private OnResponseListener onCreateGameResponseListener = new OnResponseListener() {
 		public void onResponseReceived(Response response) {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
-				Log.e(TAG, response.getErrorMsg());
+				Log.e(App.getTag(MainActivity.this), response.getErrorMsg());
 			}
 		}
 	};
@@ -151,7 +150,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void onResponseReceived(Response response) {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
-				Log.e(TAG, response.getErrorMsg());
+				Log.e(App.getTag(MainActivity.this), response.getErrorMsg());
 				return;
 			}
 			try {
@@ -181,7 +180,7 @@ public class MainActivity extends Activity {
 		@Override
 		public void onResponseReceived(Response response) {
 			if (response.getStatusCode() != HttpStatus.SC_OK) {
-				Log.e(TAG, response.getErrorMsg());
+				Log.e(App.getTag(MainActivity.this), response.getErrorMsg());
 				return;
 			}
 			try {
@@ -222,9 +221,9 @@ public class MainActivity extends Activity {
 		helloUser.setVisibility(View.VISIBLE);
 	}
 	
-//	@Override
-//	protected void onUserLeaveHint() {
-//		super.onUserLeaveHint();
-//		finish();
-//	}
+	@Override
+	protected void onUserLeaveHint() {
+		super.onUserLeaveHint();
+		finish();
+	}
 }

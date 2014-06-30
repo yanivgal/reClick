@@ -3,7 +3,8 @@
     style="@style/main_container" >
 
     <include layout="@layout/footer" />
-    <include layout="@layout/settings"/>
+
+    <include layout="@layout/settings" />
 
     <LinearLayout
         android:id="@+id/game_main_linear_layout"
@@ -16,17 +17,16 @@
             <ImageButton
                 android:id="@+id/tile_1"
                 style="@style/game_activity_game_image_button.blue"
+                android:contentDescription="@null"
                 android:onClick="tileClicked"
-                android:tag="1"
-                android:contentDescription="@null" />
+                android:tag="1" />
 
             <ImageButton
                 android:id="@+id/tile_2"
                 style="@style/game_activity_game_image_button.green"
+                android:contentDescription="@null"
                 android:onClick="tileClicked"
-                android:tag="2"
-                android:contentDescription="@null" />
-            
+                android:tag="2" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,21 +36,27 @@
             <ImageButton
                 android:id="@+id/tile_3"
                 style="@style/game_activity_game_image_button.red"
+                android:contentDescription="@null"
                 android:onClick="tileClicked"
-                android:tag="3"
-                android:contentDescription="@null" />
+                android:tag="3" />
 
             <ImageButton
                 android:id="@+id/tile_4"
                 style="@style/game_activity_game_image_button.yellow"
+                android:contentDescription="@null"
                 android:onClick="tileClicked"
-                android:tag="4"
-                android:contentDescription="@null" />
-            
+                android:tag="4" />
         </LinearLayout>
-
     </LinearLayout>
-    
+
+    <ListView
+        android:id="@+id/game_activity_rivals_info_list"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="bottom" >
+    </ListView>
+
     <TextView
         android:id="@+id/game_game_message"
         style="@style/game_activity_game_message" />

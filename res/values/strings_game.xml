@@ -24,4 +24,7 @@
     
     <string name="game_activity_game_over_message">Game Over</string>
     
+    <string name="game_activity_rivals_row_default_rival_nickname_text">Nickname</string>
+    <string name="game_activity_rivals_row_default_rival_location_text">Location</string>
+    
 </resources>

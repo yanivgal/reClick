@@ -20,6 +20,14 @@ public class Urls {
 		return buildUrl(context, context.getString(R.string.games_collection));
 	}
 	
+	public static String getGame(Context context, String gameId) {
+		return buildUrl(context,
+						context.getString(R.string.games_collection)
+							+ File.separator
+							+ gameId
+						);
+	}
+	
 	public static String getUserGames(Context context, String username) {
 		return buildUrl(context,
 						context.getString(R.string.players_collection)
@@ -89,6 +97,14 @@ public class Urls {
 							+ username
 							+ File.separator
 							+ context.getString(R.string.method_location)
+						);
+	}
+	
+	public static String getPlayerInfo(Context context, String username) {
+		return buildUrl(context,
+						context.getString(R.string.players_collection)
+							+ File.separator
+							+ username
 						);
 	}
 	
