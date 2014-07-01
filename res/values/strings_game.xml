@@ -27,4 +27,6 @@
     <string name="game_activity_rivals_row_default_rival_nickname_text">Nickname</string>
     <string name="game_activity_rivals_row_default_rival_location_text">Location</string>
     
+    <string name="game_activity_rivals_list_headline_text">In this game</string>
+    
 </resources>
