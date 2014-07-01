@@ -331,4 +331,33 @@ public class GameActivity extends Activity {
 		super.onDestroy();
 		App.stopLocationService(this);
 	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			gameId = extras.getString("gameId");
+			sequenceString = extras.getString("sequence");
+		}
+		
+		App.startLocationService(this);
+		sendGetGamePlayersInfoRequest();
+		
+		setContentView(R.layout.game);
+		
+		gameMessage = (TextView) findViewById(R.id.game_game_message);
+		
+		if (sequenceString == null || sequenceString.equals("null")) {
+			sequenceString = "";
+			sequence = new ArrayList<String>();
+		} else {
+			sequence = new ArrayList<String>(Arrays.asList(sequenceString.split(",")));
+		}
+			
+		if (!sequence.isEmpty()) {
+			animateSequence(sequence, false, false);
+		}
+	}
 }

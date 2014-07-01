@@ -238,4 +238,35 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		App.stopLocationService(this);
 	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		
+		mainLayout = (LinearLayout) findViewById(R.id.main_activity_main_layout);
+		popUpLayout = (LinearLayout) findViewById(R.id.main_activity_create_game_popup_menu);
+		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+		gameName = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_name_editText);
+		gameDescription = (EditText) findViewById(R.id.main_activity_create_game_popup_menu_game_description_editText);
+		helloUser = (TextView) findViewById(R.id.main_activity_hello_user_textView);
+		
+		helloUser.setText(getString(R.string.main_activity_hello_user_textView_prefix_text)
+						+ " " + Prefs.getNickname(this));
+		
+		((FrameLayout) findViewById(R.id.main_activity_container)).setOnTouchListener(onTouchListener);
+		
+		sendGetOpenGamesListRequest();
+		sendGetCurrentUserGamesListRequest();
+		
+		if (receiver == null) {
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
+	        filter.addCategory(Intent.CATEGORY_DEFAULT);
+	        receiver = new GcmUiUpdateReceiver(this);
+	        registerReceiver(receiver, filter);
+		}
+		
+		App.startLocationService(this);
+	}
 }
