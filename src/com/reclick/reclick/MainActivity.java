@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 			receiver = null;
 		}
 		
-//		App.stopLocationService(this);
+		App.stopLocationService(this);
 	}
 	
 	@Override
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
 	        registerReceiver(receiver, filter);
 		}
 		
-//		App.startLocationService(this);
+		App.startLocationService(this);
 	}
 	
 	public void settingsButtonClicked(View view) {
@@ -236,6 +236,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-//		App.stopLocationService(this);
+		App.stopLocationService(this);
 	}
 }
