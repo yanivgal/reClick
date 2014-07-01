@@ -2,6 +2,6 @@
 <resources>
 
     <integer name="min_time">0</integer>
-    <integer name="min_distance">500</integer>
+    <integer name="min_distance">1</integer>
 
 </resources>
