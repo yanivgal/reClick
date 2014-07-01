@@ -18,6 +18,7 @@ import unite.Response;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -40,6 +41,7 @@ public class GameActivity extends Activity {
 	private String correctStep;
 	private ArrayList<String> sequence;
 	private TextView gameMessage;
+	private MediaPlayer mediaPlayer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class GameActivity extends Activity {
 		}
 			
 		if (!sequence.isEmpty()) {
-			animateSequence(sequence, false);
+			animateSequence(sequence, false, false);
 		}
 	}
 	
@@ -120,7 +122,7 @@ public class GameActivity extends Activity {
 				public void run() {
 					try {
 						Thread.sleep(1500);
-					} catch (InterruptedException e) { }
+					} catch (InterruptedException e) {}
 
 					finish();
 					startActivity(new Intent(GameActivity.this, MainActivity.class));
@@ -130,7 +132,10 @@ public class GameActivity extends Activity {
 		}
 		
 		if (!correctStep(tileNum)) {
+			playMoveSound(0);
 			showCorrectStep();
+		} else {
+			playMoveSound(tileNum);
 		}
 	}
 	
@@ -149,7 +154,7 @@ public class GameActivity extends Activity {
 				public void run() {
 					try {
 						Thread.sleep(1500);
-					} catch (InterruptedException e) { }
+					} catch (InterruptedException e) {}
 
 					finish();
 					startActivity(new Intent(GameActivity.this, MainActivity.class));
@@ -160,11 +165,11 @@ public class GameActivity extends Activity {
 	
 	private void showCorrectStep() {
 		ArrayList<String> correctTileSequence = new ArrayList<String>();
-		int numOfBlinks = 5;
+		int numOfBlinks = 3;
 		for (int i = 0; i < numOfBlinks; i++) {
 			correctTileSequence.add(correctStep);
 		}
-		animateSequence(correctTileSequence, true);
+		animateSequence(correctTileSequence, true, true);
 	}
 	
 	private void appendNewStep(int tileNum) {
@@ -172,6 +177,7 @@ public class GameActivity extends Activity {
 			sequenceString += ",";
 		}
 		sequenceString += tileNum;
+		playMoveSound(tileNum);
 	}
 	
 	private void sendPlayerMove() {
@@ -187,7 +193,7 @@ public class GameActivity extends Activity {
 		return tileNum == Integer.parseInt(correctStep);
 	}
 
-	private void animateSequence(final ArrayList<String> sequence, final boolean endSequence) {
+	private void animateSequence(final ArrayList<String> sequence, final boolean endSequence, final boolean gameOver) {
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -197,10 +203,10 @@ public class GameActivity extends Activity {
 				for (String tileNum : sequence) {
 					if (i++ == sequence.size() && endSequence) {
 						executor.execute(new TileAnimationRunnable(
-								Integer.parseInt(tileNum), true));
+								Integer.parseInt(tileNum), true, gameOver));
 					} else {
 						executor.execute(new TileAnimationRunnable(
-								Integer.parseInt(tileNum), false));
+								Integer.parseInt(tileNum), false, gameOver));
 					}
 				}
 			}
@@ -211,10 +217,12 @@ public class GameActivity extends Activity {
 		
 		private int tileNum;
 		private boolean lastTile;
+		private boolean gameOver;
 		
-		public TileAnimationRunnable(int tileNum, boolean lastTile) {
+		public TileAnimationRunnable(int tileNum, boolean lastTile, boolean gameOver) {
 			this.tileNum = tileNum;
 			this.lastTile = lastTile;
+			this.gameOver = gameOver;
 		}
 		
 		public void run() {
@@ -223,6 +231,10 @@ public class GameActivity extends Activity {
 			}
 			
 			pressTileHandler.sendEmptyMessage(tileNum);
+			
+			if (!gameOver) {
+				playMoveSound(tileNum);
+			}
 			
 			try {
 				Thread.sleep(350);
@@ -270,6 +282,30 @@ public class GameActivity extends Activity {
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
 		finish();
+	}
+	
+	private void playMoveSound(int tileNum) {
+		
+		if (mediaPlayer != null) {
+			mediaPlayer.release();
+		}
+		
+		if (tileNum == 1) {
+			mediaPlayer = MediaPlayer.create(this, R.raw.blue);
+			mediaPlayer.start();
+		} else if (tileNum == 2) {
+			mediaPlayer = MediaPlayer.create(this, R.raw.green);
+			mediaPlayer.start();
+		} else if (tileNum == 3) {
+			mediaPlayer = MediaPlayer.create(this, R.raw.red);
+			mediaPlayer.start();
+		} else if (tileNum == 4) {
+			mediaPlayer = MediaPlayer.create(this, R.raw.yellow);
+			mediaPlayer.start();
+		} else {
+			mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
+			mediaPlayer.start();
+		}
 	}
 	
 //	@Override
