@@ -29,4 +29,9 @@
     
     <string name="game_activity_rivals_list_headline_text">In this game</string>
     
+    <integer name ="tile1">1</integer>
+    <integer name ="tile2">2</integer>
+    <integer name ="tile3">3</integer>
+    <integer name ="tile4">4</integer>
+    
 </resources>
