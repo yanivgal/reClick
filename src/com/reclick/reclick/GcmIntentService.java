@@ -36,7 +36,6 @@ public class GcmIntentService extends IntentService {
 	 */
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.e("onHandleIntent", "GCM message");
 		Bundle extras = intent.getExtras();
 		try {
 			gcmCommands.get(extras.getString("type")).exec(extras);

@@ -78,7 +78,7 @@ public class GamesAdapter extends BaseAdapter {
 		boolean started;
 		TextView gameName;
 		TextView gameDescription;
-		Button joinOrEnter;
+		Button joinOrPlay;
 	}
 
 	@Override
@@ -90,14 +90,14 @@ public class GamesAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.gameName = (TextView) convertView.findViewById(R.id.main_activity_games_row_game_name);
 			holder.gameDescription = (TextView) convertView.findViewById(R.id.main_activity_games_row_game_description);
-			holder.joinOrEnter = (Button) convertView.findViewById(R.id.main_activity_join_or_enter_game_button);
+			holder.joinOrPlay = (Button) convertView.findViewById(R.id.main_activity_join_or_enter_game_button);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
 		try {
-			JSONObject currentGame = (JSONObject)games.get(position);
+			JSONObject currentGame = (JSONObject) games.get(position);
 			holder.gameName.setText(currentGame.getString("name"));
 			holder.gameDescription.setText(currentGame.getString("description"));
 			holder.gameId = currentGame.getString("id");
@@ -105,9 +105,16 @@ public class GamesAdapter extends BaseAdapter {
 			String started = currentGame.getString("started");
 			holder.started = started.equals("1") ? true : false;
 			if (isCurrUserGames) {
-				holder.joinOrEnter.setText("Enter");
+				JSONArray players = currentGame.getJSONArray("players");
+				if (!holder.started || getThisPlayerTurn(players) != currentGame.getInt("turn")) {
+					holder.joinOrPlay.setVisibility(View.INVISIBLE);
+				} else {
+					holder.joinOrPlay.setText("Play");
+				}
 			}
-			holder.joinOrEnter.setOnClickListener(onClickListener);
+			if (holder.joinOrPlay.getVisibility() == View.VISIBLE) {
+				holder.joinOrPlay.setOnClickListener(onClickListener);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -115,6 +122,20 @@ public class GamesAdapter extends BaseAdapter {
 		return convertView;
 	}
 	
+	private int getThisPlayerTurn(JSONArray players) {
+		for (int i = 0; i < players.length(); i++) {
+			try {
+				JSONObject currentPlayer = (JSONObject) players.get(i);
+				if (Prefs.getUsername(context).equals(currentPlayer.getString("username"))) {
+					return currentPlayer.getInt("turn");
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
 	private OnClickListener onClickListener = new OnClickListener() {
 		
 		@Override
