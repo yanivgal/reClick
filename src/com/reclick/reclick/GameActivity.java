@@ -18,11 +18,11 @@ import unite.Response;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -41,7 +41,7 @@ public class GameActivity extends Activity {
 	private String correctStep;
 	private ArrayList<String> sequence;
 	private TextView gameMessage;
-	private MediaPlayer mediaPlayer;
+	private SoundsPlayer soundsPlayer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,10 @@ public class GameActivity extends Activity {
 			sequenceString = extras.getString("sequence");
 		}
 		
+		soundsPlayer = new SoundsPlayer(this);
+		
 		App.startLocationService(this);
+		
 		sendGetGamePlayersInfoRequest();
 		
 		setContentView(R.layout.game);
@@ -286,25 +289,17 @@ public class GameActivity extends Activity {
 	
 	private void playMoveSound(int tileNum) {
 		
-		if (mediaPlayer != null) {
-			mediaPlayer.release();
-		}
-		
-		if (tileNum == 1) {
-			mediaPlayer = MediaPlayer.create(this, R.raw.blue);
-			mediaPlayer.start();
-		} else if (tileNum == 2) {
-			mediaPlayer = MediaPlayer.create(this, R.raw.green);
-			mediaPlayer.start();
-		} else if (tileNum == 3) {
-			mediaPlayer = MediaPlayer.create(this, R.raw.red);
-			mediaPlayer.start();
-		} else if (tileNum == 4) {
-			mediaPlayer = MediaPlayer.create(this, R.raw.yellow);
-			mediaPlayer.start();
+		if (tileNum == getResources().getInteger(R.integer.tile1)) {
+			soundsPlayer.playResource(R.raw.blue);
+		} else if (tileNum == getResources().getInteger(R.integer.tile2)) {
+			soundsPlayer.playResource(R.raw.green);
+		} else if (tileNum == getResources().getInteger(R.integer.tile3)) {
+			soundsPlayer.playResource(R.raw.red);
+		} else if (tileNum == getResources().getInteger(R.integer.tile4)) {
+			soundsPlayer.playResource(R.raw.yellow);
 		} else {
-			mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
-			mediaPlayer.start();
+			((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(1000);
+			soundsPlayer.playResource(R.raw.wrong);
 		}
 	}
 	
@@ -330,6 +325,7 @@ public class GameActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		App.stopLocationService(this);
+		soundsPlayer.release();
 	}
 	
 	@Override

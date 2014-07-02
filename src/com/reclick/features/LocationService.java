@@ -37,20 +37,24 @@ public class LocationService extends Service implements LocationListener {
 			
 			new Thread() {
 				public void run() {
-					Looper.prepare();
-					getResources().getInteger(R.integer.min_time);
-					locationManager.requestLocationUpdates(
-							LocationManager.GPS_PROVIDER,
-							getResources().getInteger(R.integer.min_time),
-							getResources().getInteger(R.integer.min_distance),
-							LocationService.this
-					);
-					locationManager.requestLocationUpdates(
-							LocationManager.NETWORK_PROVIDER,
-							getResources().getInteger(R.integer.min_time),
-							getResources().getInteger(R.integer.min_distance),
-							LocationService.this
-					);
+					if (Looper.myLooper() == null) {
+						Looper.prepare();
+					}
+					if (locationManager != null) {
+						getResources().getInteger(R.integer.min_time);
+						locationManager.requestLocationUpdates(
+								LocationManager.GPS_PROVIDER,
+								getResources().getInteger(R.integer.min_time),
+								getResources().getInteger(R.integer.min_distance),
+								LocationService.this
+						);
+						locationManager.requestLocationUpdates(
+								LocationManager.NETWORK_PROVIDER,
+								getResources().getInteger(R.integer.min_time),
+								getResources().getInteger(R.integer.min_distance),
+								LocationService.this
+						);
+					}
 					Looper.loop();
 				}
 			}.start();
