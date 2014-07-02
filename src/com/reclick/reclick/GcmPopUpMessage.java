@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GcmPopUpMessage extends Activity {
@@ -24,6 +25,8 @@ public class GcmPopUpMessage extends Activity {
 		if (!extras.containsKey("gameId") || !extras.containsKey("sequence")) {
 			goToIntent = new Intent(this, MainActivity.class);
 		} else {
+			((Button) findViewById(R.id.gcm_pop_up_message_confirm_button)).setVisibility(View.VISIBLE);
+			((Button) findViewById(R.id.gcm_pop_up_message_later_button)).setVisibility(View.VISIBLE);
 			goToIntent = new Intent(this, GameActivity.class);
 			goToIntent.putExtra("gameId", extras.getString("gameId"));
 			goToIntent.putExtra("sequence", extras.getString("sequence"));
@@ -31,17 +34,17 @@ public class GcmPopUpMessage extends Activity {
 	}
 	
 	public void confirmButtonClicked(View view) {
-		removeNotification();
+		removeGcmNotification();
 		startActivity(goToIntent);
 		finish();
 	}
 	
 	public void laterButtonClicked(View view) {
-		removeNotification();
+		removeGcmNotification();
 		finish();
 	}
 	
-	private void removeNotification() {
+	private void removeGcmNotification() {
 		((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
 		.cancel(getResources()
 		.getInteger(R.integer.gcm_notification_id));

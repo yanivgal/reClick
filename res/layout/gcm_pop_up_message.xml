@@ -14,12 +14,14 @@
         <Button
             android:id="@+id/gcm_pop_up_message_confirm_button"
             style="@style/gcm_pop_up_message_button.confirm"
-            android:onClick="confirmButtonClicked" />
+            android:onClick="confirmButtonClicked"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/gcm_pop_up_message_later_button"
             style="@style/gcm_pop_up_message_button.later"
-            android:onClick="laterButtonClicked" />
+            android:onClick="laterButtonClicked"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>

@@ -42,6 +42,8 @@ public class GameActivity extends Activity {
 	private ArrayList<String> sequence;
 	private TextView gameMessage;
 	private SoundsPlayer soundsPlayer;
+	private int numOfPresses;
+	private int sequenceSize;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class GameActivity extends Activity {
 			gameId = extras.getString("gameId");
 			sequenceString = extras.getString("sequence");
 		}
+		
+		numOfPresses = 0;
 		
 		soundsPlayer = new SoundsPlayer(this);
 		
@@ -73,6 +77,8 @@ public class GameActivity extends Activity {
 		if (!sequence.isEmpty()) {
 			animateSequence(sequence, false, false);
 		}
+		
+		sequenceSize = sequence.size();
 	}
 	
 	private void sendGetGamePlayersInfoRequest() {
@@ -104,7 +110,11 @@ public class GameActivity extends Activity {
 	};
 
 	public void tileClicked(View view) {
+		if (numOfPresses > sequenceSize) {
+			return;
+		}
 		handleStep(view);
+		numOfPresses++;
 	}
 	
 	private void handleStep(View view) {
@@ -197,6 +207,7 @@ public class GameActivity extends Activity {
 	}
 
 	private void animateSequence(final ArrayList<String> sequence, final boolean endSequence, final boolean gameOver) {
+		
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
@@ -215,7 +226,7 @@ public class GameActivity extends Activity {
 			}
 		}, 1000);
 	}
-	
+
 	private class TileAnimationRunnable implements Runnable {
 		
 		private int tileNum;
