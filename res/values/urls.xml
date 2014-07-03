@@ -3,7 +3,7 @@
 
     <string name="scheme">http</string>
     
-    <string name="host">84.108.106.16</string>
+    <string name="host">192.168.43.141</string>
     
     <string name="path_prefix">reclick</string>
     
