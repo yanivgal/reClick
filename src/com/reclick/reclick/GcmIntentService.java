@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 public class GcmIntentService extends IntentService {
 	
@@ -74,11 +73,7 @@ public class GcmIntentService extends IntentService {
 	private class PlayerMadeHisMoveCommand implements Command {
 		@Override
 		public void exec(Bundle extras) {
-			Intent broadcastIntent = new Intent();
-			broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_PLAYER_PLAYED_HIS_MOVE);
-			broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-			broadcastIntent.putExtras(extras);
-			sendBroadcast(broadcastIntent);
+			updateGamesUi();
 			
 			String message = extras.getString("message");
         	String gameId = extras.getString("gameId");
@@ -92,6 +87,8 @@ public class GcmIntentService extends IntentService {
 	private class PlayerFailedCommand implements Command {
 		@Override
 		public void exec(Bundle extras) {
+			updateGamesUi();
+			
 			String message = extras.getString("message");
     		sendOpenReClickNotification(message);
     		
@@ -102,6 +99,8 @@ public class GcmIntentService extends IntentService {
 	private class YouWonCommand implements Command {
 		@Override
 		public void exec(Bundle extras) {
+			updateGamesUi();
+			
 			String message = extras.getString("message");
     		sendOpenReClickNotification(message);
     		
@@ -158,5 +157,12 @@ public class GcmIntentService extends IntentService {
     	}
     	popUpIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     	startActivity(popUpIntent);
+    }
+    
+    private void updateGamesUi() {
+    	Intent broadcastIntent = new Intent();
+		broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_UPDATE_GAMES);
+		broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+		sendBroadcast(broadcastIntent);
     }
 }

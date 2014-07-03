@@ -26,7 +26,7 @@ public class GcmUiUpdateReceiver extends BroadcastReceiver {
 	
 	public static final String ACTION_GAME_CREATED = "gameCreated";
 	public static final String ACTION_GAME_CREATED_CREATOR = "gameCreatedCreator";
-	public static final String ACTION_PLAYER_PLAYED_HIS_MOVE = "playerPlayedHisMove";
+	public static final String ACTION_UPDATE_GAMES = "updateGames";
 	
 	private Activity activity;
 	
@@ -37,13 +37,12 @@ public class GcmUiUpdateReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {		
 		String action = intent.getAction();
-		Log.e("asd", action);
 		if (action.equals(ACTION_GAME_CREATED)) {
 			gameCreated(intent);
 		} else if (action.equals(ACTION_GAME_CREATED_CREATOR)) {
 			gameCreatedCreator(intent);
-		} else if (action.equals(ACTION_PLAYER_PLAYED_HIS_MOVE)) {
-			playerPlayedHisMove();
+		} else if (action.equals(ACTION_UPDATE_GAMES)) {
+			updateGames();
 		}
 	}
 	
@@ -81,7 +80,7 @@ public class GcmUiUpdateReceiver extends BroadcastReceiver {
 		currentUserGamesListAdapter.add(game);
 	}
 	
-	private void playerPlayedHisMove() {
+	private void updateGames() {
 		new Client()
 			.get(Urls.getUserGames(activity, Prefs.getUsername(activity)))
 			.setHeader(HTTP.CONTENT_TYPE, activity.getString(R.string.application_json))

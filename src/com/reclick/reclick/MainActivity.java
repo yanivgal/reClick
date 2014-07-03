@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
-			filter.addAction(GcmUiUpdateReceiver.ACTION_PLAYER_PLAYED_HIS_MOVE);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_UPDATE_GAMES);
 	        filter.addCategory(Intent.CATEGORY_DEFAULT);
 	        receiver = new GcmUiUpdateReceiver(this);
 	        registerReceiver(receiver, filter);
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
-			filter.addAction(GcmUiUpdateReceiver.ACTION_PLAYER_PLAYED_HIS_MOVE);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_UPDATE_GAMES);
 	        filter.addCategory(Intent.CATEGORY_DEFAULT);
 	        receiver = new GcmUiUpdateReceiver(this);
 	        registerReceiver(receiver, filter);
@@ -264,7 +264,7 @@ public class MainActivity extends Activity {
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED);
 			filter.addAction(GcmUiUpdateReceiver.ACTION_GAME_CREATED_CREATOR);
-			filter.addAction(GcmUiUpdateReceiver.ACTION_PLAYER_PLAYED_HIS_MOVE);
+			filter.addAction(GcmUiUpdateReceiver.ACTION_UPDATE_GAMES);
 	        filter.addCategory(Intent.CATEGORY_DEFAULT);
 	        receiver = new GcmUiUpdateReceiver(this);
 	        registerReceiver(receiver, filter);
