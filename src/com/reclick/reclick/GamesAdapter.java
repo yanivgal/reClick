@@ -105,6 +105,10 @@ public class GamesAdapter extends BaseAdapter {
 			String started = currentGame.getString("started");
 			holder.started = started.equals("1") ? true : false;
 			if (isCurrUserGames) {
+				if (!currentGame.has("players")) {
+					holder.joinOrPlay.setVisibility(View.INVISIBLE);
+					return convertView;
+				}
 				JSONArray players = currentGame.getJSONArray("players");
 				if (!holder.started || getThisPlayerTurn(players) != currentGame.getInt("turn")) {
 					holder.joinOrPlay.setVisibility(View.INVISIBLE);
