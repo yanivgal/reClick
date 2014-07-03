@@ -103,14 +103,16 @@ public class GamesAdapter extends BaseAdapter {
 			holder.gameId = currentGame.getString("id");
 			holder.sequence = currentGame.getString("sequence");
 			String started = currentGame.getString("started");
-			holder.started = started.equals("1") ? true : false;
+			holder.started = started.equals("true") ? true : false;
 			if (isCurrUserGames) {
 				if (!currentGame.has("players")) {
 					holder.joinOrPlay.setVisibility(View.INVISIBLE);
 					return convertView;
 				}
 				JSONArray players = currentGame.getJSONArray("players");
-				if (!holder.started || getThisPlayerTurn(players) != currentGame.getInt("turn")) {
+				int turnInPlayer = getThisPlayerTurn(players);
+				int turnInGame = currentGame.getInt("turn");
+				if (!holder.started || turnInPlayer != turnInGame) {
 					holder.joinOrPlay.setVisibility(View.INVISIBLE);
 				} else {
 					holder.joinOrPlay.setText("Play");
