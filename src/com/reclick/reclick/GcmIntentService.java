@@ -74,6 +74,12 @@ public class GcmIntentService extends IntentService {
 	private class PlayerMadeHisMoveCommand implements Command {
 		@Override
 		public void exec(Bundle extras) {
+			Intent broadcastIntent = new Intent();
+			broadcastIntent.setAction(GcmUiUpdateReceiver.ACTION_PLAYER_PLAYED_HIS_MOVE);
+			broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+			broadcastIntent.putExtras(extras);
+			sendBroadcast(broadcastIntent);
+			
 			String message = extras.getString("message");
         	String gameId = extras.getString("gameId");
         	String sequence = extras.getString("sequence");

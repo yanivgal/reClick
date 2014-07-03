@@ -72,6 +72,11 @@ public class GamesAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 	
+	public void updateGames(JSONArray games) {
+		this.games = games;
+		notifyDataSetChanged();
+	}
+	
 	private class ViewHolder {
 		String gameId;
 		String sequence;
@@ -116,6 +121,7 @@ public class GamesAdapter extends BaseAdapter {
 					holder.joinOrPlay.setVisibility(View.INVISIBLE);
 				} else {
 					holder.joinOrPlay.setText("Play");
+					holder.joinOrPlay.setVisibility(View.VISIBLE);
 				}
 			}
 			if (holder.joinOrPlay.getVisibility() == View.VISIBLE) {
